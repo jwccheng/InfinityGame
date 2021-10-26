@@ -1,0 +1,503 @@
+{% extends "main/header.html" %}
+{% load static %}
+{% load i18n %}
+{% load mathfilters %}
+{% load widget_tweaks %}
+{% block content %}
+
+    <!-- hero start -->
+    <section class="hero">
+      <!-- <div class="hero__shape"><img src="{% static 'assets/images/elements/hero-shape.jpg.png' %}" alt="image"></div>
+      <div class="hero__element"><img src="{% static 'assets/images/elements/hero-building.png' %}" alt="image"></div> -->
+      <div class="hero__car wow bounceIn" data-wow-duration="0.5s" data-wow-delay="1s">
+        <img src="{% static 'assets/images/elements/car-shadow.png' %}" alt="image" class="car-shadow">
+        <img src="{% static 'assets/images/elements/car-ray.png' %}" alt="image" class="car-ray">
+        <img src="{% static 'assets/images/elements/car-light.png' %}" alt="image" class="car-light">
+        <img src="{% static 'assets/images/elements/hero-car.png' %}" alt="image" class="hero-car">
+        <img src="{% static 'assets/images/elements/car-star.png' %}" alt="image" class="car-star">
+      </div>
+      <div class="container">
+        <div class="row justify-content-center justify-content-lg-start">
+          <div class="col-lg-6 col-md-8">
+            <div class="hero__content">
+              <div class="hero__subtitle wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.3s">Contest FOR YOUR CHANCE to</div>
+              <h2 class="hero__title wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">big win</h2>
+              <p class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.7s">Now's your chance to win a car! Check out the prestige cars you can win in our car prize draws. Will you be our next lucky winner?</p>
+              <div class="hero__btn wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.9s">
+                <a href="/dashboard" class="cmn-btn">Register Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="hero__thumb">
+              <img src="{% static 'assets/images/elements/car-main.png' %}" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- hero start -->
+
+
+    <section class="position-relative pt-120 pb-120 overflow-hidden">
+      <div class="play-elements wow bounceIn" data-wow-duration="0.5s" data-wow-delay="0.7s">
+        <img src="{% static 'assets/images/elements/play-el.png' %}" alt="image">
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 text-sm-left text-center wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.3s">
+            <div class="section-header">
+              <span class="section-sub-title">Need to know about</span>
+              <h2 class="section-title">Our Game</h2>
+              <p>Our list of fun & comprehensive games!</p>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-none-30 justify-content-xl-start justify-content-center">
+          <div class="col-xl-3 col-lg-4 col-sm-6 mb-30">
+            <div class="play-card bg_img" data-background="{% static 'assets/images/elements/card-bg-1.jpg' %}">
+              <div class="play-card__icon">
+                <img src="{% static 'd-assets/images/lucky.png' %}" alt="image-icon">
+                <span class="play-card__number">01</span>
+              </div>
+              <div class="play-card__content">
+                <h3 class="play-card__title">Lucky Number</h3>
+                <p>Lucky Number</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-4 col-sm-6 mb-30">
+            <div class="play-card bg_img" data-background="{% static 'assets/images/elements/card-bg-2.jpg' %}">
+              <div class="play-card__icon">
+                <img src="{% static 'd-assets/images/mysterybox.png' %}" alt="image-icon">
+                <span class="play-card__number">02</span>
+              </div>
+              <div class="play-card__content">
+                <h3 class="play-card__title">Gachapon</h3>
+                <p>Gachapon</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-4 col-sm-6 mb-30">
+            <div class="play-card bg_img" data-background="{% static 'assets/images/elements/card-bg-3.jpg' %}">
+              <div class="play-card__icon">
+                <img src="{% static 'd-assets/images/legend.png' %}" alt="image-icon">
+                <span class="play-card__number">03</span>
+              </div>
+              <div class="play-card__content">
+                <h3 class="play-card__title">Legend of Martial Art</h3>
+                <p>Legend of Martial Art</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-4 col-sm-6 mb-30">
+            <div class="play-card bg_img" data-background="{% static 'assets/images/elements/card-bg-3.jpg' %}">
+              <div class="play-card__icon">
+                <img src="{% static 'd-assets/images/chinese.png' %}" alt="image-icon">
+                <span class="play-card__number">04</span>
+              </div>
+              <div class="play-card__content">
+                <h3 class="play-card__title">Chinese Chess</h3>
+                <p>Chinese Chess</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- contest section start -->
+    <section class="position-relative pt-120 pb-120">
+      <!-- <div class="bg-el"><img src="{% static 'assets/images/elements/contest-bg.png' %}" alt="image"></div> -->
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.3s">
+            <div class="section-header text-center">
+              <span class="section-sub-title">Try your chance at winning</span>
+              <h2 class="section-title">Current Contest</h2>
+              <p>Participants buy tickets and lots are drawn to determine the winners.</p>
+            </div>
+          </div>
+        </div><!-- row end -->
+        <div class="row wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.3s">
+          <div class="col-lg-12">
+            <ul class="nav nav-tabs justify-content-center mb-30 border-0" id="contestTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="cmn-btn d-flex align-items-center active" id="car-tab" data-toggle="tab" href="#car" role="tab" aria-controls="car" aria-selected="true"><span class="mr-3"><img src="{% static 'assets/images/icon/btn/car.png' %}" alt="icon"></span> Prizes</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="contestTabContent">
+              <div class="tab-pane fade show active" id="car" role="tabpanel" aria-labelledby="car-tab">
+                <div class="row mb-none-30">
+                  <div class="col-xl-4 col-md-6 mb-30">
+                    <div class="contest-card">
+                      <a href="contest-details-one.html" class="item-link"></a>
+                      <div class="contest-card__thumb">
+                        <img src="{% static 'assets/images/contest/watch.png' %}" alt="image">
+                        <a href="#0" class="action-icon"><i class="far fa-heart"></i></a>
+                        <div class="contest-num">
+                          <span>contest no:</span>
+                          <h4 class="number">b2t</h4>
+                        </div>
+                      </div>
+                      <div class="contest-card__content">
+                        <div class="left">
+                          <h5 class="contest-card__name">Omega Speedmaster 2201.50</h5>
+                        </div>
+                        <div class="right">
+                          <span class="contest-card__price"><img src="{% static 'd-assets/images/diamondcoin.png' %}" height="40" !important> 5000</span>
+                          <p>Price</p>
+                        </div>
+                      </div>
+                    </div><!-- contest-card end -->
+                  </div>
+                  <div class="col-xl-4 col-md-6 mb-30">
+                    <div class="contest-card">
+                      <a href="contest-details-one.html" class="item-link"></a>
+                      <div class="contest-card__thumb">
+                        <img src="{% static 'assets/images/contest/iphone.png' %}" alt="image">
+                        <a href="#0" class="action-icon"><i class="far fa-heart"></i></a>
+                        <div class="contest-num">
+                          <span>contest no:</span>
+                          <h4 class="number">x9u</h4>
+                        </div>
+                      </div>
+                      <div class="contest-card__content">
+                        <div class="left">
+                          <h5 class="contest-card__name">iPhone 13 Pro</h5>
+                        </div>
+                        <div class="right">
+                          <span class="contest-card__price"><img src="{% static 'd-assets/images/diamondcoin.png' %}" height="40" !important> 1200</span>
+                          <p>Price</p>
+                        </div>
+                      </div>
+                    </div><!-- contest-card end -->
+                  </div>
+                  <div class="col-xl-4 col-md-6 mb-30">
+                    <div class="contest-card">
+                      <a href="contest-details-one.html" class="item-link"></a>
+                      <div class="contest-card__thumb">
+                        <img src="{% static 'assets/images/contest/applewatch.png' %}" alt="image">
+                        <a href="#0" class="action-icon"><i class="far fa-heart"></i></a>
+                        <div class="contest-num">
+                          <span>contest no:</span>
+                          <h4 class="number">8y3</h4>
+                        </div>
+                      </div>
+                      <div class="contest-card__content">
+                        <div class="left">
+                          <h5 class="contest-card__name">Apple Watch SE</h5>
+                        </div>
+                        <div class="right">
+                          <span class="contest-card__price"><img src="{% static 'd-assets/images/diamondcoin.png' %}" height="40" !important> 400</span>
+                          <p>Price</p>
+                        </div>
+                      </div>
+                    </div><!-- contest-card end -->
+                  </div>
+                  <div class="col-xl-4 col-md-6 mb-30">
+                    <div class="contest-card">
+                      <a href="contest-details-one.html" class="item-link"></a>
+                      <div class="contest-card__thumb">
+                        <img src="{% static 'assets/images/contest/macbook.png' %}" alt="image">
+                        <a href="#0" class="action-icon"><i class="far fa-heart"></i></a>
+                        <div class="contest-num">
+                          <span>contest no:</span>
+                          <h4 class="number">r9d</h4>
+                        </div>
+                      </div>
+                      <div class="contest-card__content">
+                        <div class="left">
+                          <h5 class="contest-card__name">Macbook Pro 13</h5>
+                        </div>
+                        <div class="right">
+                          <span class="contest-card__price"><img src="{% static 'd-assets/images/diamondcoin.png' %}" height="40" !important> 1600</span>
+                          <p>Price</p>
+                        </div>
+                      </div>
+                    </div><!-- contest-card end -->
+                  </div>
+                  <div class="col-xl-4 col-md-6 mb-30">
+                    <div class="contest-card">
+                      <a href="contest-details-one.html" class="item-link"></a>
+                      <div class="contest-card__thumb">
+                        <img src="{% static 'assets/images/contest/massage.png' %}" alt="image">
+                        <a href="#0" class="action-icon"><i class="far fa-heart"></i></a>
+                        <div class="contest-num">
+                          <span>contest no:</span>
+                          <h4 class="number">pr2</h4>
+                        </div>
+                      </div>
+                      <div class="contest-card__content">
+                        <div class="left">
+                          <h5 class="contest-card__name">Osim Massage Chair</h5>
+                        </div>
+                        <div class="right">
+                          <span class="contest-card__price"><img src="{% static 'd-assets/images/diamondcoin.png' %}" height="40" !important> 1800</span>
+                          <p>Price</p>
+                        </div>
+                      </div>
+                    </div><!-- contest-card end -->
+                  </div>
+                  <div class="col-xl-4 col-md-6 mb-30">
+                    <div class="contest-card">
+                      <a href="contest-details-one.html" class="item-link"></a>
+                      <div class="contest-card__thumb">
+                        <img src="{% static 'assets/images/contest/bmw.png' %}" alt="image">
+                        <a href="#0" class="action-icon"><i class="far fa-heart"></i></a>
+                        <div class="contest-num">
+                          <span>contest no:</span>
+                          <h4 class="number">w03</h4>
+                        </div>
+                      </div>
+                      <div class="contest-card__content">
+                        <div class="left">
+                          <h5 class="contest-card__name">BMW</h5>
+                        </div>
+                        <div class="right">
+                          <span class="contest-card__price"><img src="{% static 'd-assets/images/diamondcoin.png' %}" height="30" !important> 20000</span>
+                          <p>Price</p>
+                        </div>
+                      </div>
+                    </div><!-- contest-card end -->
+                  </div>
+                </div>
+              </div>
+            </div><!-- table content end -->
+          </div>
+        </div><!-- row end-->
+        <div class="row mt-30">
+          <div class="col-lg-12">
+            <div class="btn-grp">
+              <a href="contest.html" class="btn-border">browse more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- contest section end -->
+
+    <!-- latest winner section start  -->
+    <section class="latest-winner-section position-relative pt-120 pb-120">
+      <div class="el-1"><img src="{% static 'assets/images/elements/w-el-1.png' %}" alt="image"></div>
+      <div class="el-2"><img src="{% static 'assets/images/elements/w-el-2.png' %}" alt="image"></div>
+      <div class="el-3"><img src="{% static 'assets/images/elements/w-el-3.png' %}" alt="image"></div>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.3s">
+            <div class="section-header text-center">
+              <span class="section-sub-title">Meet the latest winners from your favorite contest</span>
+              <h2 class="section-title">Latest Winners</h2>
+              <p>Check your ticket number's to see if you are a Winner in the Dream Lottery.</p>
+            </div>
+          </div>
+        </div><!-- row end -->
+
+        <div class="row wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">
+          <div class="col-lg-12">
+            <ul class="nav nav-tabs winner-tab-nav" id="winnerTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="dream-tab" data-toggle="tab" href="#dream" role="tab" aria-controls="dream" aria-selected="true">
+                  <div class="icon-thumb"><img src="{% static 'assets/images/icon/winner-tab/1.png' %}" alt="image"></div>
+                  <span>Dream Car</span>
+                </a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="watch-tab" data-toggle="tab" href="#watch" role="tab" aria-controls="watch" aria-selected="false">
+                  <div class="icon-thumb"><img src="{% static 'assets/images/icon/winner-tab/3.png' %}" alt="image"></div>
+                  <span>watch</span>
+                </a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="laptop-tab" data-toggle="tab" href="#laptop" role="tab" aria-controls="laptop" aria-selected="false">
+                  <div class="icon-thumb"><img src="{% static 'assets/images/icon/winner-tab/4.png' %}" alt="image"></div>
+                  <span>laptop</span>
+                </a>
+              </li>
+            </ul>
+            <div class="tab-content mt-50" id="winnerTabContent">
+              <div class="tab-pane fade show active" id="dream" role="tabpanel" aria-labelledby="dream-tab">
+                <div class="row mb-none-30">
+                  <div class="col-lg-12 mb-30">
+                    <div class="winner-card mb-30">
+                      <div class="winner-card__thumb">
+                        <img src="{% static 'assets/images/contest/bmw.png' %}" alt="image">
+                      </div>
+                      <div class="winner-card__content">
+                        <div class="content-top">
+                          <div class="left">
+                            <h5>BMW Car</h5>
+                          </div>
+                          <div class="right">
+                            <span>Draw took place on</span>
+                            <p>Saturday April 20, 2021</p>
+                          </div>
+                        </div>
+                        <div class="content-bottom">
+                          <div class="number-list-wrapper">
+                            <p>Winning Numbers:</p>
+                            <ul class="number-list mt-2">
+                              <li>11</li>
+                              <li>88</li>
+                              <li>23</li>
+                              <li>9</li>
+                              <li>19</li>
+                              <li>26</li>
+                              <li>87</li>
+                            </ul><!-- number-list end -->
+                          </div>
+                          <div class="right">
+                            <p>Contest No:</p>
+                            <span class="contest-num">B2T</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="btn-grp">
+                      <a href="winner.html" class="btn-border">browse more</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="watch" role="tabpanel" aria-labelledby="watch-tab">
+                <div class="row mb-none-30">
+                  <div class="col-lg-12 mb-30">
+                    <div class="winner-card mb-30">
+                      <div class="winner-card__thumb">
+                        <img src="{% static 'assets/images/contest/watch.png' %}" alt="image">
+                      </div>
+                      <div class="winner-card__content">
+                        <div class="content-top">
+                          <div class="left">
+                            <h5>Omega Seamaster 2201.50</h5>
+                          </div>
+                          <div class="right">
+                            <span>Draw took place on</span>
+                            <p>Saturday April 20, 2021</p>
+                          </div>
+                        </div>
+                        <div class="content-bottom">
+                          <div class="number-list-wrapper">
+                            <p>Winning Numbers:</p>
+                            <ul class="number-list mt-2">
+                              <li>11</li>
+                              <li>88</li>
+                              <li>23</li>
+                              <li>9</li>
+                              <li>19</li>
+                              <li>26</li>
+                              <li>87</li>
+                            </ul><!-- number-list end -->
+                          </div>
+                          <div class="right">
+                            <p>Contest No:</p>
+                            <span class="contest-num">B2T</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="btn-grp">
+                      <a href="winner.html" class="btn-border">browse more</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="laptop" role="tabpanel" aria-labelledby="laptop-tab">
+                <div class="row mb-none-30">
+                  <div class="col-lg-12 mb-30">
+                    <div class="winner-card mb-30">
+                      <div class="winner-card__thumb">
+                        <img src="{% static 'assets/images/contest/macbook.png' %}" alt="image">
+                      </div>
+                      <div class="winner-card__content">
+                        <div class="content-top">
+                          <div class="left">
+                            <h5>Macbook Pro 13</h5>
+                          </div>
+                          <div class="right">
+                            <span>Draw took place on</span>
+                            <p>Saturday April 20, 2021</p>
+                          </div>
+                        </div>
+                        <div class="content-bottom">
+                          <div class="number-list-wrapper">
+                            <p>Winning Numbers:</p>
+                            <ul class="number-list mt-2">
+                              <li>11</li>
+                              <li>88</li>
+                              <li>23</li>
+                              <li>9</li>
+                              <li>19</li>
+                              <li>26</li>
+                              <li>87</li>
+                            </ul><!-- number-list end -->
+                          </div>
+                          <div class="right">
+                            <p>Contest No:</p>
+                            <span class="contest-num">B2T</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="btn-grp">
+                      <a href="winner.html" class="btn-border">browse more</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- tab-content end -->
+          </div>
+        </div><!-- row end -->
+      </div>
+    </section>
+    <!-- latest winner section end  -->
+
+    <!-- support section start  -->
+    <section class="pb-120">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="section-header text-center">
+              <span class="section-sub-title">Get in touch with our friendly support</span>
+              <h2 class="section-title">Customer Support</h2>
+              <p>Have a question or need help? Contact our friendly support team.</p>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-none-30">
+          <div class="col-lg-6 mb-30 wow zoomIn" data-wow-duration="0.5s" data-wow-delay="0.3s">
+            <div class="support-card">
+              <div class="support-card__thumb">
+                <img src="{% static 'assets/images/icon/support/1.png' %}" alt="image">
+              </div>
+              <div class="support-card__content">
+                <h3 class="support-card__title">Talk to our support team</h3>
+                <p>Got a question about Lotteries? Get in touch with our friendly staff.</p>
+                <div class="btn-grp justify-content-xl-start mt-3">
+                  <a href="tel:XXXXX" class="btn-border btn-sm text-capitalize">Call us <i class="fas fa-phone-alt"></i></a>
+                  <a href="mailto:infinity@gmail.com" class="cmn-btn btn-sm text-capitalize">Email us <i class="far fa-envelope"></i></a>
+                </div>
+              </div>
+            </div><!-- support-card end -->
+          </div>
+          <div class="col-lg-6 mb-30 wow zoomIn" data-wow-duration="0.5s" data-wow-delay="0.5s">
+            <div class="support-card">
+              <div class="support-card__thumb">
+                <img src="{% static 'assets/images/icon/support/2.png' %}" alt="image">
+              </div>
+              <div class="support-card__content">
+                <h3 class="support-card__title">Our Guide to Infinity Games</h3>
+                <p>Check out our FAQs to see if we can help you out. </p>
+                <div class="btn-grp justify-content-xl-start mt-3">
+                  <a href="faq.html" class="btn-border btn-sm text-capitalize">FAQs & Help</a>
+                </div>
+              </div>
+            </div><!-- support-card end -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- support section end  -->
+
+{% endblock %}

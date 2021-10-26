@@ -1,0 +1,92 @@
+{% extends "dashboard/header.html" %}
+{% load static %}
+{% load i18n %}
+{% load mathfilters %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="content-body">
+	<!-- <div class="form-head" style="background-image:url('images/background/bg3.jpg');background-position: bottom; ">
+		<div class="container max d-flex align-items-center mt-0">
+			<h2 class="font-w600 title text-white mb-2 mr-auto ">Dashboard</h2>
+			<div class="weather-btn mb-2">
+				<span class="mr-3 font-w600 text-black"><i class="fa fa-cloud mr-2"></i>21</span>
+				<select class="form-control style-1 default-select  mr-3 ">
+					<option>Medan, IDN</option>
+					<option>Jakarta, IDN</option>
+					<option>Surabaya, IDN</option>
+				</select>
+			</div>
+			<a href="javascript:void(0);" class="btn white-transparent mb-2"><i class="las la-calendar scale5 mr-3"></i>Filter Periode</a>
+		</div>
+	</div> -->
+	<div class="container-fluid">
+		<div class="authincation-content">
+			<div class="row no-gutters">
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="bg-primary coin-holding mt-4 flex-wrap">
+								<div class="mb-2 coin-bx">
+									<div class="d-flex align-items-center">
+										<div>
+											<img src="{% static 'd-assets/images/rubycoin.png' %}" height="50px">
+										</div>
+										<div class="ml-3">
+											<h4 class="coin-font font-w600 mb-0 text-white">Ruby</h4>
+										</div>
+									</div>
+								</div>
+								<div class="mb-2">
+									<div class="d-flex align-items-center">	
+										<div class="ml-3">
+											<h2 class="mb-0 text-white coin-font-1">{{user.ruby}}</h2>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-12">
+					<div class="auth-form">
+						<div class="text-center mb-3">
+							<img src="images/logo-full.png" alt="">
+						</div>
+						<h4 class="text-center mb-4">Register Member Account</h4>
+						<form method="POST">
+							{% csrf_token %}
+							<div class="form-group">
+								<label class="mb-1"><strong>Username</strong></label>
+								{{form.username | add_class:"form-control"}}
+							</div>
+							<div class="form-group">
+								<label class="mb-1"><strong>Email</strong></label>
+								{{form.email | add_class:"form-control"}}
+							</div>
+							<div class="form-group">
+								<label class="mb-1"><strong>Mobile Number</strong></label>
+								{{form.user_mobile | add_class:"form-control"}}
+							</div>
+							<div class="form-group">
+								<label class="mb-1"><strong>Ruby</strong></label>
+								{{formAmount.amount | add_class:"form-control"}}
+							</div>
+							<div class="form-group">
+								<label class="mb-1"><strong>Password</strong></label>
+								{{form.password1 | add_class:"form-control"}}
+							</div>
+							<div class="form-group">
+								<label class="mb-1"><strong>Password</strong></label>
+								{{form.password2 | add_class:"form-control"}}
+							</div>
+							<div class="text-center mt-4">
+								<button type="submit" class="btn btn-primary btn-block">Register</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

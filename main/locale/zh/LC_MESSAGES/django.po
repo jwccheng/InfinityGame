@@ -1,0 +1,529 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-25 00:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\templates\main\404.html:46
+msgid "Page Not Found"
+msgstr "网页未找到"
+
+#: .\templates\main\404.html:48
+msgid "We Couldnt Find The Page You Are Looking For.."
+msgstr "我们找不到您要寻找的网页"
+
+#: .\templates\main\404.html:50
+msgid "BACK TO HOME"
+msgstr "返回首页"
+
+#: .\templates\main\admin-register.html:23
+#: .\templates\main\admin-register.html:71
+#: .\templates\main\member-register.html:23
+#: .\templates\main\member-register.html:71
+#: .\templates\main\register-link.html:59
+#: .\templates\main\register-link.html:107 .\templates\main\register.html:59
+#: .\templates\main\register.html:107
+msgid "Sign Up"
+msgstr "注册"
+
+#: .\templates\main\admin-register.html:31
+#: .\templates\main\edit-profile.html:104
+#: .\templates\main\member-register.html:31 .\templates\main\profile.html:58
+#: .\templates\main\register-link.html:67 .\templates\main\register.html:67
+msgid "Sponsor"
+msgstr "推荐者"
+
+#: .\templates\main\admin-register.html:36
+#: .\templates\main\edit-profile.html:120
+#: .\templates\main\member-register.html:36
+#: .\templates\main\register-link.html:72 .\templates\main\register.html:72
+msgid "Number"
+msgstr "号码"
+
+#: .\templates\main\admin-register.html:41
+#: .\templates\main\admin_userlist.html:66
+#: .\templates\main\edit-profile.html:125
+#: .\templates\main\member-register.html:41
+#: .\templates\main\register-link.html:77 .\templates\main\register.html:77
+msgid "Full Name"
+msgstr "全名"
+
+#: .\templates\main\admin-register.html:46
+#: .\templates\main\admin_userlist.html:65
+#: .\templates\main\edit-profile.html:77
+#: .\templates\main\member-register.html:46
+#: .\templates\main\register-link.html:82 .\templates\main\register.html:82
+msgid "Username"
+msgstr "用户名"
+
+#: .\templates\main\admin-register.html:51
+#: .\templates\main\member-register.html:51
+#: .\templates\main\register-link.html:87 .\templates\main\register.html:87
+msgid "Email Address"
+msgstr "电子邮件地址"
+
+#: .\templates\main\admin-register.html:55
+#: .\templates\main\member-register.html:55
+#: .\templates\main\register-link.html:91 .\templates\main\register.html:91
+msgid "Mobile Number"
+msgstr "电话号码"
+
+#: .\templates\main\admin-register.html:59
+#: .\templates\main\member-register.html:59
+#: .\templates\main\register-link.html:95 .\templates\main\register.html:95
+msgid "Password"
+msgstr "密码"
+
+#: .\templates\main\admin-register.html:63
+#: .\templates\main\edit-profile.html:217
+#: .\templates\main\member-register.html:63
+#: .\templates\main\register-link.html:99
+msgid "Confirm Password"
+msgstr "确认密码"
+
+#: .\templates\main\admin-register.html:67
+#: .\templates\main\edit-profile.html:210
+#: .\templates\main\edit-profile.html:213
+#: .\templates\main\member-register.html:67
+#: .\templates\main\register-link.html:103 .\templates\main\register.html:103
+msgid "PIN"
+msgstr "PIN"
+
+#: .\templates\main\admin_approval.html:20 .\templates\main\dashboard.html:292
+msgid "Cashback/ROI"
+msgstr "返还投资"
+
+#: .\templates\main\admin_approval.html:20
+msgid "Approval"
+msgstr "批准"
+
+#: .\templates\main\admin_approval.html:27 .\templates\main\product.html:59
+#: .\templates\main\product.html:101 .\templates\main\product.html:144
+#: .\templates\main\product.html:187 .\templates\main\register.html:99
+msgid "Product"
+msgstr "产品"
+
+#: .\templates\main\admin_approval.html:32 .\templates\main\package.html:59
+#: .\templates\main\package.html:97 .\templates\main\package.html:133
+#: .\templates\main\package.html:169
+msgid "Investment"
+msgstr "投资"
+
+#: .\templates\main\admin_approval.html:89
+msgid "username"
+msgstr "用户名"
+
+#: .\templates\main\admin_approval.html:90
+msgid "type"
+msgstr "类型"
+
+#: .\templates\main\admin_approval.html:91
+msgid "amount"
+msgstr "金额"
+
+#: .\templates\main\admin_approval.html:91
+msgid "monthly"
+msgstr "每月"
+
+#: .\templates\main\admin_approval.html:92
+msgid "date"
+msgstr "日期"
+
+#: .\templates\main\admin_approval.html:93
+msgid "approve"
+msgstr "批准"
+
+#: .\templates\main\admin_userlist.html:64
+msgid "ID"
+msgstr "ID"
+
+#: .\templates\main\admin_userlist.html:67 .\templates\main\profile.html:50
+msgid "Date Registered"
+msgstr "注册日期"
+
+#: .\templates\main\admin_userlist.html:69
+#: .\templates\main\edit-profile.html:96 .\templates\main\profile.html:54
+msgid "Rank"
+msgstr "等级"
+
+#: .\templates\main\admin_userlist.html:70 .\templates\main\dashboard.html:302
+#: .\templates\main\edit-profile.html:100 .\templates\main\package.html:213
+#: .\templates\main\product.html:234 .\templates\main\transfer.html:112
+#: .\templates\main\withdrawal.html:139
+msgid "Status"
+msgstr "状态"
+
+#: .\templates\main\admin_userlist.html:71
+msgid "Modify"
+msgstr "更改"
+
+#: .\templates\main\admin_userlist.html:90
+msgid "Choose here"
+msgstr "在这里选择"
+
+#: .\templates\main\admin_userlist.html:91
+msgid "Active"
+msgstr "活跃"
+
+#: .\templates\main\admin_userlist.html:92
+msgid "Frozen"
+msgstr "冻结"
+
+#: .\templates\main\admin_userlist.html:93
+msgid "Terminated"
+msgstr "终止"
+
+#: .\templates\main\admin_withdrawal.html:48
+msgid "Download"
+msgstr "下载"
+
+#: .\templates\main\admin_withdrawal.html:51
+msgid "Filter"
+msgstr "过滤器选择"
+
+#: .\templates\main\dashboard.html:24
+msgid "Account Type"
+msgstr "帐户类型"
+
+#: .\templates\main\dashboard.html:30
+msgid ""
+"Choose purchase for OWN USE or purchase Investment, please confirm your "
+"purchase options."
+msgstr "选择购买自用 或 购买委托，请确定您的购买选项。"
+
+#: .\templates\main\dashboard.html:36 .\templates\main\header.html:149
+msgid "Own Use"
+msgstr "购买自用"
+
+#: .\templates\main\dashboard.html:41 .\templates\main\header.html:150
+msgid "For Investment"
+msgstr "购买委托"
+
+#: .\templates\main\dashboard.html:59
+msgid "Welcome Back"
+msgstr "欢迎回来"
+
+#: .\templates\main\dashboard.html:66 .\templates\main\product.html:97
+#: .\templates\main\product.html:140 .\templates\main\product.html:183
+#: .\templates\main\transfer.html:77
+msgid "Member"
+msgstr "会员"
+
+#: .\templates\main\dashboard.html:177
+msgid "Team Size"
+msgstr "团队规模"
+
+#: .\templates\main\dashboard.html:194
+msgid "Bronze Team"
+msgstr "团队 Bronze"
+
+#: .\templates\main\dashboard.html:210
+msgid "Silver Team"
+msgstr "团队 Silver"
+
+#: .\templates\main\dashboard.html:226
+msgid "Gold Team"
+msgstr "团队 Gold"
+
+#: .\templates\main\dashboard.html:242
+msgid "Monthly Group Sales"
+msgstr "团队业绩（月）"
+
+#: .\templates\main\dashboard.html:258
+msgid "Direct Sponsor Sales"
+msgstr "直推业绩"
+
+#: .\templates\main\dashboard.html:274
+msgid "Group Sales"
+msgstr "团队总业绩"
+
+#: .\templates\main\dashboard.html:300 .\templates\main\history.html:63
+#: .\templates\main\package.html:97 .\templates\main\package.html:133
+#: .\templates\main\package.html:169 .\templates\main\package.html:208
+#: .\templates\main\product.html:97 .\templates\main\product.html:101
+#: .\templates\main\product.html:140 .\templates\main\product.html:144
+#: .\templates\main\product.html:183 .\templates\main\product.html:187
+#: .\templates\main\product.html:229 .\templates\main\transfer.html:71
+msgid "Type"
+msgstr "类型"
+
+#: .\templates\main\dashboard.html:301 .\templates\main\history.html:59
+#: .\templates\main\package.html:103 .\templates\main\package.html:139
+#: .\templates\main\package.html:175 .\templates\main\transfer.html:89
+#: .\templates\main\transfer.html:109 .\templates\main\withdrawal.html:39
+#: .\templates\main\withdrawal.html:75 .\templates\main\withdrawal.html:108
+#: .\templates\main\withdrawal.html:136
+msgid "Amount"
+msgstr "金额"
+
+#: .\templates\main\dashboard.html:301
+msgid "Monthly"
+msgstr "每月"
+
+#: .\templates\main\dashboard.html:303 .\templates\main\history.html:61
+#: .\templates\main\package.html:209 .\templates\main\product.html:230
+#: .\templates\main\transfer.html:110 .\templates\main\withdrawal.html:137
+msgid "Date"
+msgstr "日期"
+
+#: .\templates\main\edit-profile.html:22
+msgid "Account"
+msgstr "帐户"
+
+#: .\templates\main\edit-profile.html:28
+msgid "Bank Information"
+msgstr "银行信息"
+
+#: .\templates\main\edit-profile.html:34 .\templates\main\edit-profile.html:210
+msgid "Security"
+msgstr "帐号安全"
+
+#: .\templates\main\edit-profile.html:57
+msgid "Upload"
+msgstr "上传"
+
+#: .\templates\main\edit-profile.html:61
+msgid "Choose File"
+msgstr "选择文件"
+
+#: .\templates\main\edit-profile.html:64
+msgid "Change Avatar"
+msgstr "更改头像"
+
+#: .\templates\main\edit-profile.html:83 .\templates\main\edit-profile.html:144
+#: .\templates\main\outlet-address.html:34
+#: .\templates\main\outlet-address.html:76
+msgid "Name"
+msgstr "名称"
+
+#: .\templates\main\edit-profile.html:89
+msgid "Email"
+msgstr "电子邮件"
+
+#: .\templates\main\edit-profile.html:117
+msgid "Personal Info"
+msgstr "个人信息"
+
+#: .\templates\main\edit-profile.html:130
+#: .\templates\main\outlet-address.html:36
+#: .\templates\main\outlet-address.html:84
+msgid "Phone Number"
+msgstr "电话号码"
+
+#: .\templates\main\edit-profile.html:136
+#: .\templates\main\outlet-address.html:35
+#: .\templates\main\outlet-address.html:80
+msgid "Address"
+msgstr "地址"
+
+#: .\templates\main\edit-profile.html:142
+#: .\templates\main\edit-profile.html:144
+msgid "Bank"
+msgstr "银行"
+
+#: .\templates\main\edit-profile.html:142
+#: .\templates\main\outlet-address.html:64
+msgid "Details"
+msgstr "资讯"
+
+#: .\templates\main\edit-profile.html:158
+msgid "Bank Account Details"
+msgstr "银行账户明细"
+
+#: .\templates\main\edit-profile.html:162 .\templates\main\history.html:62
+#: .\templates\main\profile.html:62 .\templates\main\transfer.html:111
+#: .\templates\main\withdrawal.html:138
+msgid "Wallet"
+msgstr "钱包"
+
+#: .\templates\main\edit-profile.html:167
+msgid "Save Changes"
+msgstr "保存更改"
+
+#: .\templates\main\edit-profile.html:168
+msgid "Cancel"
+msgstr "取消"
+
+#: .\templates\main\edit-profile.html:181
+msgid "Account Password"
+msgstr "户口密码"
+
+#: .\templates\main\edit-profile.html:184
+msgid "Current Password"
+msgstr "当前密码"
+
+#: .\templates\main\edit-profile.html:189
+#: .\templates\main\edit-profile.html:194
+msgid "New Password"
+msgstr "新密码"
+
+#: .\templates\main\edit-profile.html:194 .\templates\main\register.html:99
+msgid "Confirm"
+msgstr "确认"
+
+#: .\templates\main\edit-profile.html:200
+msgid "Change Password"
+msgstr "更改密码"
+
+#: .\templates\main\edit-profile.html:213
+msgid "New"
+msgstr "新"
+
+#: .\templates\main\edit-profile.html:222
+msgid "Change PIN"
+msgstr "更改 PIN"
+
+#: .\templates\main\header.html:88
+msgid "Choose Language"
+msgstr "选择语言"
+
+#: .\templates\main\header.html:113
+msgid "My Account"
+msgstr "我的帐户"
+
+#: .\templates\main\header.html:114
+msgid "Edit Account"
+msgstr "编辑账户"
+
+#: .\templates\main\header.html:116
+msgid "Outlet Details"
+msgstr "店铺资讯"
+
+#: .\templates\main\header.html:118
+msgid "Car Details"
+msgstr "汽车资讯"
+
+#: .\templates\main\header.html:120 .\templates\main\partners.html:16
+#: .\templates\main\transfer.html:71
+msgid "Partners"
+msgstr "团队"
+
+#: .\templates\main\header.html:121
+msgid "Register Member"
+msgstr "注册会员"
+
+#: .\templates\main\header.html:122
+msgid "Logout"
+msgstr "登出"
+
+#: .\templates\main\header.html:148
+msgid "Dashboard"
+msgstr "主页"
+
+#: .\templates\main\header.html:151 .\templates\main\withdrawal.html:121
+msgid "Withdraw"
+msgstr "提取"
+
+#: .\templates\main\header.html:152 .\templates\main\transfer.html:62
+#: .\templates\main\transfer.html:94
+msgid "Transfer"
+msgstr "积分转账"
+
+#: .\templates\main\header.html:153
+msgid "History"
+msgstr "记录"
+
+#: .\templates\main\history.html:60
+msgid "Category"
+msgstr "类型"
+
+#: .\templates\main\outlet-address.html:15
+#: .\templates\main\outlet-address.html:26
+msgid "Outlet Address"
+msgstr "店铺地址"
+
+#: .\templates\main\outlet-address.html:34
+#: .\templates\main\outlet-address.html:64
+#: .\templates\main\outlet-address.html:76
+msgid "Outlet"
+msgstr "店铺"
+
+#: .\templates\main\outlet-address.html:37
+msgid "ACTION"
+msgstr "行动"
+
+#: .\templates\main\outlet-address.html:94
+msgid "Add"
+msgstr "添加"
+
+#: .\templates\main\package.html:107 .\templates\main\package.html:143
+#: .\templates\main\package.html:179 .\templates\main\product.html:109
+#: .\templates\main\product.html:152 .\templates\main\product.html:195
+#: .\templates\main\withdrawal.html:112
+msgid "Total Amount"
+msgstr "总金额"
+
+#: .\templates\main\package.html:111 .\templates\main\package.html:147
+#: .\templates\main\package.html:183 .\templates\main\product.html:118
+#: .\templates\main\product.html:161 .\templates\main\product.html:204
+#: .\templates\main\withdrawal.html:43 .\templates\main\withdrawal.html:79
+#: .\templates\main\withdrawal.html:116
+msgid "Pin Verification"
+msgstr "密码验证"
+
+#: .\templates\main\package.html:118 .\templates\main\package.html:154
+#: .\templates\main\package.html:190 .\templates\main\product.html:125
+#: .\templates\main\product.html:168 .\templates\main\product.html:211
+msgid "Buy"
+msgstr "购买"
+
+#: .\templates\main\package.html:232 .\templates\main\product.html:253
+#: .\templates\main\transfer.html:124 .\templates\main\withdrawal.html:151
+msgid "Success"
+msgstr "成功"
+
+#: .\templates\main\product.html:105 .\templates\main\product.html:148
+#: .\templates\main\product.html:191
+msgid "Quantity"
+msgstr "数量"
+
+#: .\templates\main\product.html:113 .\templates\main\product.html:156
+#: .\templates\main\product.html:199
+msgid "Installation Location"
+msgstr "安装位置"
+
+#: .\templates\main\profile.html:89
+msgid "Referral Link"
+msgstr "推荐链接"
+
+#: .\templates\main\register.html:110
+msgid "Already Have an Account"
+msgstr "已经有一个帐号"
+
+#: .\templates\main\register.html:111
+msgid "Sign In"
+msgstr "登入"
+
+#: .\templates\main\transfer.html:81
+msgid "Verify"
+msgstr "验证"
+
+#: .\templates\main\withdrawal.html:33 .\templates\main\withdrawal.html:46
+#: .\templates\main\withdrawal.html:82
+msgid "Convert"
+msgstr "转换"
+
+#: .\templates\main\withdrawal.html:48 .\templates\main\withdrawal.html:84
+msgid "CONVERTING"
+msgstr "转换"
+
+#: .\templates\main\withdrawal.html:95
+msgid "Wthdrawal"
+msgstr "提取"
+
+#: .\templates\main\withdrawal.html:104
+msgid "Withdrawal Method"
+msgstr "提款方式"

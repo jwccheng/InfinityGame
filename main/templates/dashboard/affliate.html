@@ -1,0 +1,50 @@
+{% extends "dashboard/header.html" %}
+{% load static %}
+{% load i18n %}
+{% load mathfilters %}
+{% load widget_tweaks %}
+{% load mptt_tags %}
+{% block content %}
+
+<div class="content-body">
+	<div class="container-fluid">
+
+		<!-- Nestable -->
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title">My Affliate</h4>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card-content">
+									<div class="nestable">
+										<div class="dd" id="nestable">
+											<ol class="dd-list">
+												{% recursetree accounts %}
+													<li class="dd-item" data-id="{{node.id}}">
+														<div class="dd-handle">{{ node.username }}</div>
+														{% if not node.is_leaf_node %}
+															<ol class="dd-list">
+																<li class="dd-item" data-id="{{node.id}}">
+																	<div class="dd-handle">{{ children }}</div>
+																</li>
+															</ol>
+														{% endif %}
+													</li>
+												{% endrecursetree %}
+											</ol>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

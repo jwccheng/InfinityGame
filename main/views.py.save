@@ -1,0 +1,719 @@
+from django.shortcuts import render, redirect
+
+from .models import Announcement
+from .models import TradingBuy
+from .models import TradingSell
+from .models import PackageTransaction
+from .models import ConvertList
+from .models import TransferLog
+from .models import Setting
+from .models import TransactionList
+from .models import WithdrawalList
+
+
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
+from .forms import NewUserForm
+from django.contrib.auth.decorators import login_required
+from . import forms
+from django.http import HttpResponse
+from account.models import Account
+from django.db.models import F
+from django.contrib import messages
+from itertools import chain
+from operator import attrgetter
+from django.utils.translation import gettext as _
+import sweetify
+
+
+# Create your views here.
+@login_required(login_url="/login")
+def homepage(request):
+    announcement_home = Announcement.objects.all().reverse().first()
+    return render(request=request,
+                  template_name="main/dashboard.html",
+                  context={"announcement": announcement_home,
+                           "setting": Setting.objects.all().reverse().first()})
+
+@login_required(login_url="/login")
+def trading(request):
+    formBuy = forms.RawCreateBuy()
+    formSell = forms.RawCreateSell()
+    buyPinform = forms.PinValidation()
+    sellPinform = forms.PinValidation()
+    buyTrade = list(TradingBuy.objects.filter(buy_member_created=request.user).all())
+    sellTrade = list(TradingSell.objects.filter(sell_member_created=request.user).all())
+    result_list = sorted(
+    chain(buyTrade, sellTrade),
+    key=attrgetter('trading_dateCreated'))
+    buy_fee = Setting.objects.values('token_transaction_fee')
+    fee_filtered = float(buy_fee[0]['token_transaction_fee'])
+    
+    if request.method == 'POST' and 'submit-buy' in request.POST:
+        formBuy = forms.RawCreateBuy(request.POST)
+        buyPinform = forms.PinValidation(request.POST)
+        print("Test")
+
+        if formBuy.is_valid() and buyPinform.is_valid():
+            
+            buy_totalQuantity = float(formBuy.cleaned_data.get("buy_quantity"))
+            buy_totalValue = float(formBuy.cleaned_data.get("buy_total_price"))
+            buy_unit = formBuy.cleaned_data.get("buy_price")
+            buy_uttcQ = Account.objects.filter(username=request.user).values(('uttc_W'))
+            buy_uttcValue = (buy_uttcQ[0]['uttc_W'])
+            print(fee_filtered)
+            print(buy_uttcValue)
+            new_total = (buy_totalValue+fee_filtered)
+            print(new_total)
+            
+            availableSell = TradingSell.objects.filter(sell_trading_status='AVAILABLE', 
+                                                       sell_quantity=buy_totalQuantity,
+                                                       sell_price=buy_unit).first()
+
+            buy_user = Account.objects.get(username=request.user)
+            buy_userForm = {'buy_member_created': buy_user}
+            userPin = Account.objects.filter(username=request.user).values(('user_pin'))
+            userPinValue = (userPin[0]['user_pin'])
+            validPin = buyPinform.cleaned_data.get("user_pin")
+
+            if validPin == userPinValue:
+                if buy_uttcValue >= new_total:
+                    if availableSell is not None:
+                        #If Trading Matched
+                        print(availableSell.sell_member_created)
+                        target_member = availableSell.sell_member_created
+                        availableSell.sell_trading_status = "COMPLETED"
+                        availableSell.save()
+                        buy_status = {'buy_trading_status': 'COMPLETED'}
+                        buy_newForm = {**formBuy.cleaned_data, **buy_userForm, **buy_status}
+
+                        stc = Account.objects.filter(username=request.user).values(('stc_W'))
+                        stcValue = float(stc[0]['stc_W'])
+                        #Commission Declaration
+                        commission = [0.3, 0.2, 0.1, 0.1, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+                        parent_node = Account.objects.get(username=request.user)
+                        total_tree = parent_node.get_ancestors(include_self=False, ascending=True)
+
+                        TradingBuy.objects.create(**buy_newForm)
+                        Account.objects.filter(username=request.user).update(uttc_W=(F('uttc_W')-(new_total)))
+                        Account.objects.filter(username=target_member).update(uttc_W=(F('uttc_W')+(buy_totalValue)))
+
+                        dropValue = (float(buy_totalQuantity) * 0.1)
+                        if stcValue > dropValue:
+                            #STC Minus dropValue
+                            Account.objects.filter(username=request.user).update(stc_W=(F('stc_W')-(dropValue)))
+                            Account.objects.filter(username=request.user).update(stc_Float=(F('stc_Float')+(buy_totalQuantity + dropValue)))
+                            
+                        elif dropValue >= stcValue:
+                            #STC Minus STC
+                            Account.objects.filter(username=request.user).update(stc_W=(F('stc_W')-(stcValue)))
+                            Account.objects.filter(username=request.user).update(stc_Float=(F('stc_Float')+(buy_totalQuantity + stcValue)))
+
+                        #Append to TransactionList
+                        t_Amount = {'amount': new_total}
+                        t_Amount_In = {'amount': buy_totalQuantity}
+                        target_Amount_In = {'amount': buy_totalValue}
+                        t_Type = {'transaction_type': 'TRADING-BUY'}
+                        t_target_Type = {'transaction_type': 'TRADING-SELL'}
+                        t_member_assc = {'member_assc': request.user}
+                        t_member_target = {'member_assc': target_member}
+
+                        w_CMIC = {'wallet_Type': "CMIC"}
+                        w_UTTC = {'wallet_Type': "UTTC"}
+
+                        t_Data_In = {'transaction_in_out': "IN"}
+                        t_Data_Out = {'transaction_in_out': "OUT"}
+
+                        t_Final_In = {**t_Data_In, **w_CMIC, **t_member_assc, **t_Type, **t_Amount_In}
+                        target_Final_In = {**t_Data_In, **w_UTTC, **t_member_target, **t_target_Type, **target_Amount_In}
+                        t_Final_Out = {**t_Data_Out, **w_UTTC, **t_member_assc, **t_Type, **t_Amount}
+                        
+                        TransactionList.objects.create(**t_Final_Out)
+                        TransactionList.objects.create(**target_Final_In)
+                        
+                        #Giving Comission
+                        for (mem, comm) in zip(total_tree, commission):
+                            print("mem: ", mem ,"; comm: ", comm)
+                            newcomm = ((float(fee_filtered) * float(0.5)) * float(comm))
+                            print(newcomm)
+                            target_current_dmi = Account.objects.filter(username=mem).values(('dmi_W'))
+                            target_final_dmi = (target_current_dmi[0]['dmi_W'])
+
+                            if target_final_dmi >= newcomm:
+                                Account.objects.filter(username=mem).update(dmi_W=(F('dmi_W')-(newcomm)))
+                                Account.objects.filter(username=mem).update(uttc_W=(F('uttc_W')+(newcomm)))
+
+                                #Append to TransactionList
+                                comm_Amount = {'amount': newcomm}
+                                comm_Type = {'transaction_type': 'FEE-COMMISSION'}
+                                comm_member_target = {'member_target': mem}
+                                comm_member_assc = {'member_assc': request.user}
+
+                                comm_UTTC = {'wallet_Type': "UTTC"}
+                                comm_DMI = {'wallet_Type': "DMI"}
+
+                                comm_Data_In = {'transaction_in_out': "IN"}
+                                comm_Data_Out = {'transaction_in_out': "OUT"}
+
+                                comm_Final_Out = {**comm_Data_Out, **comm_DMI, **comm_member_target, **comm_member_assc, **comm_Type, **comm_Amount}
+                                comm_Final_In = {**comm_Data_In, **comm_UTTC, **comm_member_assc, **comm_member_target, **comm_Type, **comm_Amount}
+                                
+                                TransactionList.objects.create(**comm_Final_Out)
+                                TransactionList.objects.create(**comm_Final_In)
+                        
+
+                        return redirect('main:trading')
+                    else:
+                        #If Trading Not Matched
+                        buy_status = {'buy_trading_status': 'AVAILABLE'}
+                        buy_newForm = {**formBuy.cleaned_data, **buy_userForm, **buy_status}
+                        TradingBuy.objects.create(**buy_newForm)
+                        Account.objects.filter(username=request.user).update(uttc_W=(F('uttc_W')-(new_total)))
+
+                        
+
+
+                        #Append to TransactionList
+                        t_Amount = {'amount': new_total}
+                        t_Type = {'transaction_type': 'TRADING-BUY'}
+                        t_member_assc = {'member_assc': request.user}
+
+                        w_UTTC = {'wallet_Type': "UTTC"}
+
+                        t_Data_In = {'transaction_in_out': "IN"}
+                        t_Data_Out = {'transaction_in_out': "OUT"}
+
+                        t_Final_Out = {**t_Data_Out, **w_UTTC, **t_member_assc, **t_Type, **t_Amount}
+                        
+                        TransactionList.objects.create(**t_Final_Out)
+
+                        return redirect('main:trading')
+                    
+        else:
+            print(formBuy.errors)
+            
+    if request.method == 'POST' and 'submit-sell' in request.POST:
+        formSell = forms.RawCreateSell(request.POST)
+        sellPinform = forms.PinValidation(request.POST)
+
+        
+
+        if formSell.is_valid() and sellPinform.is_valid():
+            sell_totalQuantity = float(formSell.cleaned_data.get("sell_quantity"))
+            sell_totalValue = formSell.cleaned_data.get("sell_total_price")
+            sell_unit = formSell.cleaned_data.get("sell_price")
+            sell_cmicQ = Account.objects.filter(username=request.user).values(('cmic_W'))
+            sell_cmicValue = (sell_cmicQ[0]['cmic_W'])
+            print(sell_cmicValue)
+            print(sell_totalValue)
+            
+            availableBuy = TradingBuy.objects.filter(buy_trading_status='AVAILABLE', 
+                                                     buy_quantity=sell_totalQuantity,
+                                                     buy_price=sell_unit).first()
+
+            sell_user = Account.objects.get(username=request.user)
+            sell_userForm = {'sell_member_created': sell_user}
+            userPin = Account.objects.filter(username=request.user).values(('user_pin'))
+            userPinValue = (userPin[0]['user_pin'])
+            validPin = sellPinform.cleaned_data.get("user_pin")
+
+            if validPin == userPinValue:
+                if sell_cmicValue >= float(sell_totalQuantity):
+                    if availableBuy is not None:
+                        #If Trading Matched
+                        target_mem = availableBuy.buy_member_created
+                        availableBuy.buy_trading_status = "COMPLETED"
+                        availableBuy.save()
+                        sell_status = {'sell_trading_status': 'COMPLETED'}
+                        sell_newForm = {**formSell.cleaned_data, **sell_userForm, **sell_status}
+
+                        stc = Account.objects.filter(username=target_mem).values(('stc_W'))
+                        stcValue = float(stc[0]['stc_W'])
+                        #Commission
+                        commission = [0.3, 0.2, 0.1, 0.1, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+                        parent_node = Account.objects.get(username=target_mem)
+                        total_tree = parent_node.get_ancestors(include_self=False, ascending=True)
+
+                        TradingSell.objects.create(**sell_newForm)
+                        Account.objects.filter(username=request.user).update(cmic_W=(F('cmic_W')-(sell_totalQuantity)))
+                        Account.objects.filter(username=request.user).update(uttc_W=(F('uttc_W')+(sell_totalValue)))
+                        print(sell_totalQuantity)
+                        dropValue = (float(sell_totalQuantity) * 0.1)
+                        if stcValue > dropValue:
+                            #STC Minus dropValue
+                            Account.objects.filter(username=target_mem).update(stc_W=(F('stc_W')-(dropValue)))
+                            Account.objects.filter(username=target_mem).update(stc_Float=(F('stc_Float')+(sell_totalQuantity + dropValue)))
+                            
+                        elif dropValue > stcValue:
+                            #STC Minus STC
+                            Account.objects.filter(username=target_mem).update(stc_W=(F('stc_W')-(stcValue)))
+                            Account.objects.filter(username=target_mem).update(stc_Float=(F('stc_Float')+(sell_totalQuantity + stcValue)))
+                            
+                        #Append to TransactionList
+                        t_Amount = {'amount': sell_totalQuantity}
+                        t_Amount_In = {'amount': sell_totalValue} 
+                        t_Type = {'transaction_type': 'TRADING-SELL'}
+                        target_Type = {'transaction_type': 'TRADING-BUY'}
+                        t_member_assc = {'member_assc': request.user}
+                        target_member_assc = {'member_assc': target_mem}
+
+                        w_CMIC = {'wallet_Type': "CMIC"}
+                        w_UTTC = {'wallet_Type': "UTTC"}
+
+                        t_Data_In = {'transaction_in_out': "IN"}
+                        t_Data_Out = {'transaction_in_out': "OUT"}
+
+                        target_Final_In = {**t_Data_In, **w_CMIC, **target_member_assc, **target_Type, **t_Amount}
+                        t_Final_In = {**t_Data_In, **w_UTTC, **t_member_assc, **t_Type, **t_Amount_In}
+                        t_Final_Out = {**t_Data_Out, **w_CMIC, **t_member_assc, **t_Type, **t_Amount}
+                        
+                        TransactionList.objects.create(**t_Final_Out)
+                        TransactionList.objects.create(**t_Final_In)
+
+                        #Giving Fee Comission
+                        for (mem, comm) in zip(total_tree, commission):
+                            print("mem: ", mem ,"; comm: ", comm)
+                            newcomm = ((float(fee_filtered) * float(0.5)) * float(comm))
+                            print(newcomm)
+                            target_current_dmi = Account.objects.filter(username=mem).values(('dmi_W'))
+                            target_final_dmi = (target_current_dmi[0]['dmi_W'])
+
+
+                            if target_final_dmi >= newcomm:
+                                Account.objects.filter(username=mem).update(dmi_W=(F('dmi_W')-(newcomm)))
+                                Account.objects.filter(username=mem).update(uttc_W=(F('uttc_W')+(newcomm)))
+
+                                #Append to TransactionList
+                                comm_DMI = {'amount': newcomm}
+                                comm_Type = {'transaction_type': 'FEE-COMMISSION'}
+                                comm_member_target = {'member_assc': mem}
+                                comm_member_assc = {'member_assc': request.user}
+
+                                comm_UTTC = {'wallet_Type': "UTTC"}
+                                comm_DMI = {'wallet_Type': "DMI"}
+
+                                comm_Data_In = {'transaction_in_out': "IN"}
+                                comm_Data_Out = {'transaction_in_out': "OUT"}
+
+                                comm_Final_Out = {**comm_Data_Out, **comm_DMI, **comm_member_assc, **comm_member_target, **comm_Type, **comm_Amount}
+                                comm_Final_In = {**comm_Data_In, **comm_UTTC, **comm_member_assc, **comm_member_target, **comm_Type, **comm_Amount}
+                                
+                                TransactionList.objects.create(**comm_Final_Out)
+                                TransactionList.objects.create(**comm_Final_In)
+
+                        return redirect('main:trading')
+                    else:
+                        #If Trading Not Matched
+                        sell_status = {'sell_trading_status': 'AVAILABLE'}
+                        sell_newForm = {**formSell.cleaned_data, **sell_userForm, **sell_status}
+                        TradingSell.objects.create(**sell_newForm)
+                        Account.objects.filter(username=request.user).update(cmic_W=(F('cmic_W')-(sell_totalQuantity)))
+                        #Append to TransactionList
+                        t_Amount = {'amount': sell_totalQuantity}
+                        t_Type = {'transaction_type': 'TRADING-SELL'}
+                        t_member_assc = {'member_assc': request.user}
+
+                        w_CMIC = {'wallet_Type': "CMIC"}
+
+                        t_Data_Out = {'transaction_in_out': "OUT"}
+
+                        t_Final_Out = {**t_Data_Out, **w_CMIC, **t_member_assc, **t_Type, **t_Amount}
+                        
+                        TransactionList.objects.create(**t_Final_Out)
+                        return redirect('main:trading')
+                else:
+                    return redirect('main:trading')
+            
+        else:
+            print(formSell.errors)
+        
+    context = { "buyPinform":buyPinform,
+                "sellPinform":sellPinform,
+                "formBuy":formBuy, 
+                "formSell":formSell, 
+                "tradingbuys": TradingBuy.objects.all, 
+                "tradingsells": TradingSell.objects.all,
+                "ownTrades": result_list,
+                "tokensettings" : Setting.objects.all,
+                "setting": Setting.objects.all().reverse().first(),}
+    return render(request, "main/trading.html", context)
+
+    
+
+
+@login_required(login_url="/login")
+def account(request):
+    return render(request=request,
+                  template_name="main/accounts.html",
+                  context={"setting": Setting.objects.all().reverse().first()}
+                  )
+
+@login_required(login_url="/login")
+def buy_usdt(request):
+    form = forms.Withdrawal()
+    if request.method == 'POST':
+        form = forms.Withdrawal(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data.get("withdrawal_amount"))
+            withdrawalAmount = form.cleaned_data.get("withdrawal_amount")
+
+            withdrawalTotal = (float(withdrawalAmount) + (float(withdrawalAmount) * 0.1))
+            uttcA = Account.objects.filter(username=request.user).values(('uttc_W'))
+            uttcV = (uttcA[0]['uttc_W'])
+
+            if uttcV >= withdrawalTotal:
+                #Valid UTTC Amount
+                w_user = Account.objects.get(username=request.user)
+                w_userForm = {'member_created': w_user, 'withdrawal_status':'PENDING', 'uttc_payment': withdrawalTotal}
+                w_newForm = {**form.cleaned_data, **w_userForm}
+                WithdrawalList.objects.create(**w_newForm)
+                Account.objects.filter(username=request.user).update(uttc_W=(F('uttc_W') - (withdrawalTotal)))
+
+    return render(request=request,
+                  template_name="main/buy_usdt.html",
+                  context={"form":form, "setting": Setting.objects.all().reverse().first(), 
+                            "withdrawal": WithdrawalList.objects.all().reverse()}
+                  )
+
+@login_required(login_url="/login")
+def buy_uttc(request):
+    return render(request=request,
+                  template_name="main/buy_uttc.html",
+                  context={"setting": Setting.objects.all().reverse().first()}
+                  )
+
+@login_required(login_url="/login")
+def package(request):
+    parent_node = Account.objects.get(username=request.user)
+    total_tree = parent_node.get_ancestors(include_self=False, ascending=True)
+    commission = [0.15, 0.08, 0.05, 0.015, 0.015, 0.015, 0.007, 0.007, 0.007, 0.007]
+    form = forms.PackageCMIS2()
+    pinform = forms.PinValidation()
+    if request.method == 'POST':
+        form = forms.PackageCMIS2(request.POST)
+        pinform = forms.PinValidation(request.POST)
+        if form.is_valid() and pinform.is_valid():
+            print(form.cleaned_data.get("p_quantity"))
+            quantityValue = form.cleaned_data.get("p_quantity")
+            cmis2Q = Account.objects.filter(username=request.user).values(('cmis2_W'))
+            cmis2Value = (cmis2Q[0]['cmis2_W'])
+
+            current_dmi = Account.objects.filter(username=request.user).values(('dmi_W'))
+            current_sti = Account.objects.filter(username=request.user).values(('sti_W'))
+            final_dmi = (current_dmi[0]['dmi_W'])
+            final_sti = (current_sti[0]['sti_W'])
+            print("Current")
+            print(final_dmi)
+            print(final_sti)
+
+            dmiMax = Account.objects.filter(username=request.user).values(('max_dmi_W'))
+            stiMax = Account.objects.filter(username=request.user).values(('max_sti_W'))
+            dmiFinalMax = (dmiMax[0]['max_dmi_W'])
+            stiFinalMax = (stiMax[0]['max_sti_W'])
+
+            dmiHalf = dmiFinalMax / 2
+            stiHalf = stiFinalMax / 2
+
+            print("Half")
+            print(dmiHalf)
+            print(stiHalf)
+            userPin = Account.objects.filter(username=request.user).values(('user_pin'))
+            userPinValue = (userPin[0]['user_pin'])
+            validPin = pinform.cleaned_data.get("user_pin")
+
+            if validPin == userPinValue:
+                if ((final_dmi <= dmiHalf) or (final_sti <= stiHalf)):
+                    if float(cmis2Value) >= float(quantityValue):
+                        p_user = Account.objects.get(username=request.user)
+                        p_userForm = {'p_member_created': p_user, 'p_type':'Regular', 'cmis2_price': quantityValue}
+                        p_newForm = {**form.cleaned_data, **p_userForm}
+                        PackageTransaction.objects.create(**p_newForm)
+                        Account.objects.filter(username=request.user).update(sti_W=(F('sti_W') + ((float(quantityValue) * 2)/0.211)))
+                        Account.objects.filter(username=request.user).update(dmi_W=(F('dmi_W')+ (float(quantityValue) * 3 )))
+                        Account.objects.filter(username=request.user).update(cmis2_W=(F('cmis2_W')-float(quantityValue)))
+
+                        #Record Max Value
+                        Account.objects.filter(username=request.user).update(max_sti_W=(F('sti_W')))
+                        Account.objects.filter(username=request.user).update(max_dmi_W=(F('dmi_W')))
+
+                        #Give Direct Sponsor Commission
+                        for (mem, comm) in zip(total_tree, commission):
+                            print("mem: ", mem ,"; comm: ", comm)
+                            newcomm = (float(quantityValue)) * comm
+                            target_current_dmi = Account.objects.filter(username=mem).values(('dmi_W'))
+                            target_final_dmi = (target_current_dmi[0]['dmi_W'])
+
+                            cmic_price = Setting.objects.values('token_price')
+                            cmic_price_value = (cmic_price[0]['token_price'])
+                            if target_final_dmi >= newcomm:
+                                uttc_comm = (newcomm / 2)
+                                cmic_comm = ((newcomm / 2) / (float(cmic_price_value)))
+                                Account.objects.filter(username=mem).update(dmi_W=(F('dmi_W')-(newcomm)))
+                                Account.objects.filter(username=mem).update(cmic_W=(F('cmic_W')+(cmic_comm)))
+                                Account.objects.filter(username=mem).update(uttc_W=(F('uttc_W')+(uttc_comm)))
+
+                                #Append to TransactionList
+                                dcomm_DMI = {'amount': newcomm}
+                                dcomm_UTTC = {'amount': uttc_comm}
+                                dcomm_CMIC = {'amount': cmic_comm}
+                                dcomm_Type = {'transaction_type': 'DIRECT-SPONSOR'}
+                                dcomm_member_target = {'member_target': mem}
+                                dcomm_member_assc = {'member_target': request.user}
+
+                                dcomm_UTTC = {'wallet_Type': "UTTC"}
+                                dcomm_DMI = {'wallet_Type': "DMI"}
+                                dcomm_CMIC = {'wallet_Type': "CMIC"}
+
+                                dcomm_Data_In = {'transaction_in_out': "IN"}
+                                dcomm_Data_Out = {'transaction_in_out': "OUT"}
+
+                                dcomm_Final_Out = {**dcomm_Data_Out, **dcomm_DMI, **dcomm_member_assc, **dcomm_member_target, **dcomm_Type, **dcomm_DMI}
+                                dcomm_CMIC_In = {**dcomm_Data_In, **dcomm_CMIC, **dcomm_member_assc, **dcomm_member_target, **dcomm_Type, **dcomm_CMIC}
+                                dcomm_UTTC_In = {**dcomm_Data_In, **dcomm_UTTC, **dcomm_member_assc, **dcomm_member_target, **dcomm_Type, **dcomm_UTTC}
+                                
+                                TransactionList.objects.create(**dcomm_Final_Out)
+                                TransactionList.objects.create(**dcomm_CMIC_In)
+                                TransactionList.objects.create(**dcomm_UTTC_In)
+
+                        return redirect('main:package')
+                    else:
+                        messages.error(request, "Error!")
+        else:
+            print(form.errors)
+    return render(request=request,
+                  template_name="main/package.html",
+                  context={"pinform":pinform, "form": form, "packages": PackageTransaction.objects.filter(p_member_created=request.user).all,
+                            "setting":Setting.objects.all().reverse().first()})
+                  
+
+@login_required(login_url="/login")
+def convert(request):
+    form = forms.ConvertList()
+    pinform = forms.PinValidation()
+    if request.method == 'POST':
+        form = forms.ConvertList(request.POST)
+        pinform = forms.PinValidation(request.POST)
+        if form.is_valid() and pinform.is_valid():
+            print(form.cleaned_data.get("convert_amount"))
+            quantityValue = form.cleaned_data.get("convert_amount")
+            uttcConvert = Account.objects.filter(username=request.user).values(('uttc_W'))
+            convertValue = (uttcConvert[0]['uttc_W'])
+            userPin = Account.objects.filter(username=request.user).values(('user_pin'))
+            userPinValue = (userPin[0]['user_pin'])
+            validPin = pinform.cleaned_data.get("user_pin")
+            print(validPin)
+            print(userPinValue)
+            if validPin == userPinValue:
+                print("print")
+                if convertValue >= quantityValue:
+                    c_user = Account.objects.get(username=request.user)
+                    c_userForm = {'c_member_created': c_user}
+                    c_newForm = {**form.cleaned_data, **c_userForm}
+                    ConvertList.objects.create(**c_newForm)
+                    Account.objects.filter(username=request.user).update(uttc_W=(F('uttc_W')-quantityValue))
+                    Account.objects.filter(username=request.user).update(cmis2_W=(F('cmis2_W')+quantityValue))
+
+                    #Append to TransactionList
+                    t_Amount = {'amount': quantityValue}
+                    t_Type = {'transaction_type': 'CONVERT'}
+                    t_member_assc = {'member_assc': c_user}
+
+                    w_UTTC = {'wallet_Type': "UTTC"}
+                    w_CMIS2 = {'wallet_Type': "CMIS2"}
+
+                    t_Data_In = {'transaction_in_out': "IN"}
+                    t_Data_Out = {'transaction_in_out': "OUT"}
+
+                    t_Final_In = {**t_Data_In, **w_CMIS2, **t_member_assc, **t_Type, **t_Amount}
+                    t_Final_Out = {**t_Data_Out, **w_UTTC, **t_member_assc, **t_Type, **t_Amount}
+                    
+                    TransactionList.objects.create(**t_Final_Out)
+                    TransactionList.objects.create(**t_Final_In)
+                    
+
+                    return redirect('main:convert')
+                else:
+                    messages.error(request, "Error!")
+        else:
+            print(form.errors)
+    return render(request=request,
+                  template_name="main/convert.html",
+                  context={"form": form, "pinform": pinform, "convertLists": ConvertList.objects.filter(c_member_created=request.user).all,
+                            "setting":Setting.objects.all().reverse().first()})
+                  
+
+@login_required(login_url="/login")
+def partner(request):
+    parent_node = Account.objects.get(username=request.user)
+    # total_tree = parent_node.get_descendants(include_self=True)
+    total_tree = (parent_node.get_descendants(include_self=True)
+                .annotate(relative_level=F('level') - parent_node.level))
+    return render(request=request,
+                  template_name="main/partner.html",
+                  context={"accounts": total_tree,"setting":Setting.objects.all().reverse().first()})
+
+@login_required(login_url="/login")
+def transfer(request):
+    form = forms.TransferCMIS2(user=request.user)
+    if request.method == 'POST':
+        form = forms.TransferCMIS2(request.user, request.POST)
+        if form.is_valid():
+            print(form.cleaned_data.get("transfer_amount"))
+            print(form.cleaned_data.get("transfer_member"))
+            quantityValue = form.cleaned_data.get("transfer_amount")
+            t_member = form.cleaned_data.get("transfer_member")
+            cmis2Transfer = Account.objects.filter(username=request.user).values(('cmis2_W'))
+            transferValue = (cmis2Transfer[0]['cmis2_W'])
+
+            if transferValue >= (float(quantityValue)):
+                t_user = Account.objects.get(username=request.user)
+                t_userForm = {'t_member_created': t_user}
+                t_newForm = {**form.cleaned_data, **t_userForm}
+                TransferLog.objects.create(**t_newForm)
+                Account.objects.filter(username=request.user).update(cmis2_W=(F('cmis2_W')-quantityValue))
+                Account.objects.filter(username=t_member).update(cmis2_W=(F('cmis2_W')+quantityValue))
+
+                #Append to TransactionList
+                t_Amount = {'amount': quantityValue}
+                t_Type = {'transaction_type': 'TRANSFER'}
+                t_member_assc = {'member_assc': t_user}
+                t_member_target = {'member_assc': t_member}
+
+                target_member_to = {'member_target': t_member}
+                target_member_from = {'member_target': t_user}
+
+                w_CMIS2 = {'wallet_Type': "CMIS2"}
+
+                t_Data_In = {'transaction_in_out': "IN"}
+                t_Data_Out = {'transaction_in_out': "OUT"}
+
+                t_Final_In = {**t_Data_In, **w_CMIS2, **t_member_target, **t_Type, **t_Amount, **target_member_from}
+                t_Final_Out = {**t_Data_Out, **w_CMIS2, **t_member_assc, **t_Type, **t_Amount, **target_member_to}
+                
+                TransactionList.objects.create(**t_Final_Out)
+                TransactionList.objects.create(**t_Final_In)
+
+                return redirect('main:transfer')
+            else:
+                messages.error(request, "Error!")
+        else:
+            print(form.errors)
+    return render(request=request,
+                  template_name="main/transfer.html",
+                  context={"form": form, "setting":Setting.objects.all().reverse().first()})
+
+@login_required(login_url="/login")
+def history(request):
+    return render(request=request,
+                  template_name="main/history.html",
+                  context={"transactions": TransactionList.objects.filter(member_assc=request.user).all(),
+                            "setting":Setting.objects.all().reverse().first()})
+
+@login_required(login_url="/login")
+def announcement_list(request):
+    return render(request=request,
+                  template_name="main/announcement_list.html",
+                  context={"announcements": Announcement.objects.all(),
+                            "setting":Setting.objects.all().reverse().first()})
+
+@login_required(login_url="/login")
+def announcement_details(request):
+    return render(request=request,
+                  template_name="main/announcement_details.html",
+                  context={"setting":Setting.objects.all().reverse().first()})
+
+@login_required(login_url="/login")
+def announcement_create(request):
+    
+	if request.method == 'POST':
+        form = forms.CreateAnnouncement(data=request.POST)
+        if form.is_valid():
+            #save announcement to db
+            form.save()
+            return redirect('main:announcement_list')
+    else:
+        form = forms.CreateAnnouncement()
+    return render(request=request,
+                  template_name="main/announcement_create.html",
+                  context={"form":form, "setting":Setting.objects.all().reverse().first()})
+
+@login_required(login_url="/login")
+def registerm(request):
+    sponsor_user = Account.objects.get(username=request.user)
+    form = forms.NewUserForm()
+    if request.method == "POST":
+        form = forms.NewUserForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.parent = request.user
+            instance.raw_password = form.cleaned_data.get('password1')
+            instance.save()
+
+            username = form.cleaned_data.get('username')
+            messages.success(request, f"New Account Created: {username}")
+            return redirect("main:homepage")
+        else:
+            for msg in form.error_messages:
+                messages.error(request, f"{msg}: {form.error_messages[msg]}")
+
+    form = forms.NewUserForm()
+    return render(request = request,
+                  template_name = "main/registerm.html",
+                  context={"form":form, "setting":Setting.objects.all().reverse().first()})
+
+
+def logout_request(request):
+    logout(request)
+    messages.info(request, "Logged Out Successfully")
+    return redirect("main:homepage")
+
+def login_request(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(request, f"You are now logged in")
+                return redirect("main:homepage")
+            else:
+                messages.error(request, "Invalid username or password")
+        else:
+            messages.error(request, "Invalid username or password")
+    form = AuthenticationForm()
+    return render(request,
+                  "main/login.html",
+                  {"form":form, "setting":Setting.objects.all().reverse().first()})
+
+def edit_profile(request):
+    
+    formW = forms.EditUSDT()
+    formM = forms.EditMobile()
+    if request.method == 'POST' and 'submit-usdt' in request.POST:
+        formW = forms.EditUSDT(request.POST)
+        if formW.is_valid():
+            usdtA = formW.cleaned_data.get("user_usdt_wallet")
+            print(usdtA)
+            Account.objects.filter(username=request.user).update(user_usdt_wallet=(usdtA))
+            return redirect('main:edit_profile')
+    elif request.method == 'POST' and 'submit-mobile' in request.POST:
+        formM = forms.EditMobile(request.POST)
+        if formM.is_valid():
+            userM = formM.cleaned_data.get("user_mobile")
+            print(userM)
+            Account.objects.filter(username=request.user).update(user_mobile=(userM))
+            return redirect('main:edit_profile')
+    else:
+        args = {'formW':formW, 'formM':formM}
+        return render(request, 'main/edit_profile.html', args)
+
+@login_required(login_url="/login")
+def security(request):
+    return render(request=request,
+                  template_name="main/security.html",
+                  context={"setting": Setting.objects.all().reverse().first()}
+                  )
+

@@ -1,0 +1,72 @@
+{% extends "dashboard/header.html" %}
+{% load static %}
+{% load i18n %}
+{% load mathfilters %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="content-body">
+	<div class="container-fluid">
+		<div class="form-head d-flex align-items-center flex-wrap mb-sm-5 mb-3">
+			<h2 class="font-w600 mb-0 text-black">My History</h2>
+			<a href="javascript:void(0);" class="btn btn-outline-secondary ml-auto"><i class="las la-calendar scale5 mr-2"></i>Filter Periode</a>
+		</div>
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="table-responsive table-hover fs-14">
+					<table class="table display mb-4 dataTablesCard short-one card-table text-black" id="example5">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Transaction ID</th>
+								<th>Date</th>
+								<th>Category</th>
+								<th>Coin</th>
+								<th>Amount</th>
+								<th>Type</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							{% for history in histories %}
+							<tr>
+								<td class="pr-0">
+									{% if history.mode == 'OUT' %}
+									<span class="bg-danger ic-icon">
+										<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M7.99954 10.4687L21.1821 23.6513C21.7435 24.2127 22.6537 24.2127 23.2151 23.6513C23.7765 23.0899 23.7765 22.1798 23.2151 21.6184L10.0325 8.43582L13.4612 8.4441L13.4612 8.44409C14.2551 8.44598 14.9002 7.80394 14.9021 7.01004C14.904 6.21593 14.2617 5.57098 13.468 5.56905L13.4668 6.06905L13.468 5.56905L6.55703 5.55234L6.54969 5.55232L6.54737 5.55239C5.75771 5.55578 5.11953 6.19662 5.11616 6.98358L5.1161 6.98585L5.11612 6.99333L5.13282 13.9043L5.13282 13.9043C5.13475 14.6982 5.77979 15.3403 6.57378 15.3384C7.36769 15.3365 8.00975 14.6914 8.00787 13.8975L8.00787 13.8975L7.99954 10.4687Z" fill="white" stroke="white"/>
+										</svg>
+									</span>
+									{% else %}
+									<span class="bg-success ic-icon">
+										<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M20.7529 19.1563L7.5703 5.97367C7.00891 5.41228 6.09876 5.41228 5.53737 5.97367C4.97598 6.53505 4.97598 7.44521 5.53737 8.0066L18.72 21.1892L15.2913 21.1809L15.2912 21.1809C14.4973 21.179 13.8522 21.8211 13.8503 22.615C13.8484 23.4091 14.4907 24.054 15.2844 24.056L15.2856 23.556L15.2844 24.056L22.1954 24.0727L22.2028 24.0727L22.2051 24.0726C22.9947 24.0692 23.6329 23.4284 23.6363 22.6414L23.6363 22.6391L23.6363 22.6317L23.6196 15.7207L23.6196 15.7207C23.6177 14.9268 22.9727 14.2847 22.1787 14.2866C21.3847 14.2885 20.7427 14.9336 20.7446 15.7275L20.7446 15.7275L20.7529 19.1563Z" fill="white" stroke="white"></path>
+										</svg>
+									</span>
+									{% endif %}
+								</td>
+								<td>#{{history.id}}</td>
+								<td>{{history.date_created}}</td>
+								<td>{{history.category}}</td>
+								<td class="wspace-no">
+									<span class="text-black">{{history.wallet}}</span>
+								</td>
+								<td>
+									<span class="text-black font-w600">{{history.amount}}</span>
+								</td>
+								<td>
+									{% if history.mode == 'OUT' %}
+									<a class="btn-link text-danger">{{history.mode}}</a>
+									{% else %}
+									<a class="btn-link text-success">{{history.mode}}</a>
+									{% endif %}
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>	
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

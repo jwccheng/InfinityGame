@@ -1,0 +1,138 @@
+{% extends "dashboard/header.html" %}
+{% load static %}
+{% load i18n %}
+{% load mathfilters %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="content-body">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="bg-warning coin-holding mt-4 flex-wrap">
+							<div class="mb-2 coin-bx">
+								<div class="d-flex align-items-center">
+									<div>
+										<img src="{% static 'd-assets/images/goldcoin.png' %}" height="50px">
+									</div>
+									<div class="ml-3">
+										<h4 class="coin-font font-w600 mb-0 text-white">Gold</h4>
+									</div>
+								</div>
+							</div>
+							<div class="mb-2">
+								<div class="d-flex align-items-center">	
+									<div class="ml-3">
+										<h2 class="mb-0 text-white coin-font-1">{{user.gold}}</h2>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="bg-primary coin-holding mt-4 flex-wrap">
+							<div class="mb-2 coin-bx">
+								<div class="d-flex align-items-center">
+									<div>
+										<img src="{% static 'd-assets/images/rubycoin.png' %}" height="50px">
+									</div>
+									<div class="ml-3">
+										<h4 class="coin-font font-w600 mb-0 text-white">Ruby</h4>
+									</div>
+								</div>
+							</div>
+							<div class="mb-2">
+								<div class="d-flex align-items-center">	
+									<div class="ml-3">
+										<h2 class="mb-0 text-white coin-font-1">{{user.ruby}}</h2>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-6 col-xxl-12">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="card">
+							<div class="table-responsive table-hover fs-14 ">
+								<table class="table display mb-4 dataTablesCard font-w600  border-no card-table text-black" id="example6">
+									<thead>
+										<tr>
+											<th>No</th>
+											<th>Ruby</th>
+											<th>Gold</th>
+											<th>Date</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for convert in converts %}
+										<tr>
+											<td>
+												<span class="bgl-secondary rank-ic fs-20">{{convert.id}}</span>
+											</td>
+											<td class="wspace-no">
+												<span class="text-black">- {{convert.amount}} <span> <img src="{% static 'd-assets/images/rubycoin.png' %}" height="35px"></span></span>	
+											</td>
+											<td class="wspace-no">
+												<span class="text-success">+ {{convert.amount}} <span> <img src="{% static 'd-assets/images/goldcoin.png' %}" height="35px"></span></span>	
+											</td>
+											<td>
+												<span class="text-black">{{convert.date_created}}</span>
+											</td>
+											
+											
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-6 col-xxl-12">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="card">
+							<div class="card-header d-sm-flex d-block pb-0 border-0">
+								<div>
+									<h4 class="fs-20 text-black">Convert Amount</h4>
+									<p class="mb-0 fs-12"></p>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="basic-form">
+									<form class="form-wrapper" method="POST">
+                                        {% csrf_token %}
+										<div class="form-group">
+											<div class="input-group input-group-lg">
+												<div class="input-group-prepend">
+													<span class="input-group-text">Amount</span>
+												</div>
+												{{ form.amount | add_class:"form-control" }}
+											</div>
+										</div>
+										<div class="row mt-4 align-items-center">
+											<div class="col-lg-6">
+												<div>
+													<p class="mb-0 fs-14">Strictly no refund policy</p>
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<div class="d-flex justify-content-end">
+													<button type="submit" class="btn btn-success" name="backSequence">Convert</button>
+												</div>	
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

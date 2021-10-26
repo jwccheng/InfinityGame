@@ -1,0 +1,529 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-25 00:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\templates\main\404.html:46
+msgid "Page Not Found"
+msgstr ""
+
+#: .\templates\main\404.html:48
+msgid "We Couldnt Find The Page You Are Looking For.."
+msgstr ""
+
+#: .\templates\main\404.html:50
+msgid "BACK TO HOME"
+msgstr ""
+
+#: .\templates\main\admin-register.html:23
+#: .\templates\main\admin-register.html:71
+#: .\templates\main\member-register.html:23
+#: .\templates\main\member-register.html:71
+#: .\templates\main\register-link.html:59
+#: .\templates\main\register-link.html:107 .\templates\main\register.html:59
+#: .\templates\main\register.html:107
+msgid "Sign Up"
+msgstr ""
+
+#: .\templates\main\admin-register.html:31
+#: .\templates\main\edit-profile.html:104
+#: .\templates\main\member-register.html:31 .\templates\main\profile.html:58
+#: .\templates\main\register-link.html:67 .\templates\main\register.html:67
+msgid "Sponsor"
+msgstr ""
+
+#: .\templates\main\admin-register.html:36
+#: .\templates\main\edit-profile.html:120
+#: .\templates\main\member-register.html:36
+#: .\templates\main\register-link.html:72 .\templates\main\register.html:72
+msgid "Number"
+msgstr ""
+
+#: .\templates\main\admin-register.html:41
+#: .\templates\main\admin_userlist.html:66
+#: .\templates\main\edit-profile.html:125
+#: .\templates\main\member-register.html:41
+#: .\templates\main\register-link.html:77 .\templates\main\register.html:77
+msgid "Full Name"
+msgstr ""
+
+#: .\templates\main\admin-register.html:46
+#: .\templates\main\admin_userlist.html:65
+#: .\templates\main\edit-profile.html:77
+#: .\templates\main\member-register.html:46
+#: .\templates\main\register-link.html:82 .\templates\main\register.html:82
+msgid "Username"
+msgstr ""
+
+#: .\templates\main\admin-register.html:51
+#: .\templates\main\member-register.html:51
+#: .\templates\main\register-link.html:87 .\templates\main\register.html:87
+msgid "Email Address"
+msgstr ""
+
+#: .\templates\main\admin-register.html:55
+#: .\templates\main\member-register.html:55
+#: .\templates\main\register-link.html:91 .\templates\main\register.html:91
+msgid "Mobile Number"
+msgstr ""
+
+#: .\templates\main\admin-register.html:59
+#: .\templates\main\member-register.html:59
+#: .\templates\main\register-link.html:95 .\templates\main\register.html:95
+msgid "Password"
+msgstr ""
+
+#: .\templates\main\admin-register.html:63
+#: .\templates\main\edit-profile.html:217
+#: .\templates\main\member-register.html:63
+#: .\templates\main\register-link.html:99
+msgid "Confirm Password"
+msgstr ""
+
+#: .\templates\main\admin-register.html:67
+#: .\templates\main\edit-profile.html:210
+#: .\templates\main\edit-profile.html:213
+#: .\templates\main\member-register.html:67
+#: .\templates\main\register-link.html:103 .\templates\main\register.html:103
+msgid "PIN"
+msgstr ""
+
+#: .\templates\main\admin_approval.html:20 .\templates\main\dashboard.html:292
+msgid "Cashback/ROI"
+msgstr ""
+
+#: .\templates\main\admin_approval.html:20
+msgid "Approval"
+msgstr ""
+
+#: .\templates\main\admin_approval.html:27 .\templates\main\product.html:59
+#: .\templates\main\product.html:101 .\templates\main\product.html:144
+#: .\templates\main\product.html:187 .\templates\main\register.html:99
+msgid "Product"
+msgstr ""
+
+#: .\templates\main\admin_approval.html:32 .\templates\main\package.html:59
+#: .\templates\main\package.html:97 .\templates\main\package.html:133
+#: .\templates\main\package.html:169
+msgid "Investment"
+msgstr ""
+
+#: .\templates\main\admin_approval.html:89
+msgid "username"
+msgstr ""
+
+#: .\templates\main\admin_approval.html:90
+msgid "type"
+msgstr ""
+
+#: .\templates\main\admin_approval.html:91
+msgid "amount"
+msgstr ""
+
+#: .\templates\main\admin_approval.html:91
+msgid "monthly"
+msgstr ""
+
+#: .\templates\main\admin_approval.html:92
+msgid "date"
+msgstr ""
+
+#: .\templates\main\admin_approval.html:93
+msgid "approve"
+msgstr ""
+
+#: .\templates\main\admin_userlist.html:64
+msgid "ID"
+msgstr ""
+
+#: .\templates\main\admin_userlist.html:67 .\templates\main\profile.html:50
+msgid "Date Registered"
+msgstr ""
+
+#: .\templates\main\admin_userlist.html:69
+#: .\templates\main\edit-profile.html:96 .\templates\main\profile.html:54
+msgid "Rank"
+msgstr ""
+
+#: .\templates\main\admin_userlist.html:70 .\templates\main\dashboard.html:302
+#: .\templates\main\edit-profile.html:100 .\templates\main\package.html:213
+#: .\templates\main\product.html:234 .\templates\main\transfer.html:112
+#: .\templates\main\withdrawal.html:139
+msgid "Status"
+msgstr ""
+
+#: .\templates\main\admin_userlist.html:71
+msgid "Modify"
+msgstr ""
+
+#: .\templates\main\admin_userlist.html:90
+msgid "Choose here"
+msgstr ""
+
+#: .\templates\main\admin_userlist.html:91
+msgid "Active"
+msgstr ""
+
+#: .\templates\main\admin_userlist.html:92
+msgid "Frozen"
+msgstr ""
+
+#: .\templates\main\admin_userlist.html:93
+msgid "Terminated"
+msgstr ""
+
+#: .\templates\main\admin_withdrawal.html:48
+msgid "Download"
+msgstr ""
+
+#: .\templates\main\admin_withdrawal.html:51
+msgid "Filter"
+msgstr ""
+
+#: .\templates\main\dashboard.html:24
+msgid "Account Type"
+msgstr ""
+
+#: .\templates\main\dashboard.html:30
+msgid ""
+"Choose purchase for OWN USE or purchase Investment, please confirm your "
+"purchase options."
+msgstr ""
+
+#: .\templates\main\dashboard.html:36 .\templates\main\header.html:149
+msgid "Own Use"
+msgstr ""
+
+#: .\templates\main\dashboard.html:41 .\templates\main\header.html:150
+msgid "For Investment"
+msgstr ""
+
+#: .\templates\main\dashboard.html:59
+msgid "Welcome Back"
+msgstr ""
+
+#: .\templates\main\dashboard.html:66 .\templates\main\product.html:97
+#: .\templates\main\product.html:140 .\templates\main\product.html:183
+#: .\templates\main\transfer.html:77
+msgid "Member"
+msgstr ""
+
+#: .\templates\main\dashboard.html:177
+msgid "Team Size"
+msgstr ""
+
+#: .\templates\main\dashboard.html:194
+msgid "Bronze Team"
+msgstr ""
+
+#: .\templates\main\dashboard.html:210
+msgid "Silver Team"
+msgstr ""
+
+#: .\templates\main\dashboard.html:226
+msgid "Gold Team"
+msgstr ""
+
+#: .\templates\main\dashboard.html:242
+msgid "Monthly Group Sales"
+msgstr ""
+
+#: .\templates\main\dashboard.html:258
+msgid "Direct Sponsor Sales"
+msgstr ""
+
+#: .\templates\main\dashboard.html:274
+msgid "Group Sales"
+msgstr ""
+
+#: .\templates\main\dashboard.html:300 .\templates\main\history.html:63
+#: .\templates\main\package.html:97 .\templates\main\package.html:133
+#: .\templates\main\package.html:169 .\templates\main\package.html:208
+#: .\templates\main\product.html:97 .\templates\main\product.html:101
+#: .\templates\main\product.html:140 .\templates\main\product.html:144
+#: .\templates\main\product.html:183 .\templates\main\product.html:187
+#: .\templates\main\product.html:229 .\templates\main\transfer.html:71
+msgid "Type"
+msgstr ""
+
+#: .\templates\main\dashboard.html:301 .\templates\main\history.html:59
+#: .\templates\main\package.html:103 .\templates\main\package.html:139
+#: .\templates\main\package.html:175 .\templates\main\transfer.html:89
+#: .\templates\main\transfer.html:109 .\templates\main\withdrawal.html:39
+#: .\templates\main\withdrawal.html:75 .\templates\main\withdrawal.html:108
+#: .\templates\main\withdrawal.html:136
+msgid "Amount"
+msgstr ""
+
+#: .\templates\main\dashboard.html:301
+msgid "Monthly"
+msgstr ""
+
+#: .\templates\main\dashboard.html:303 .\templates\main\history.html:61
+#: .\templates\main\package.html:209 .\templates\main\product.html:230
+#: .\templates\main\transfer.html:110 .\templates\main\withdrawal.html:137
+msgid "Date"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:22
+msgid "Account"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:28
+msgid "Bank Information"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:34 .\templates\main\edit-profile.html:210
+msgid "Security"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:57
+msgid "Upload"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:61
+msgid "Choose File"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:64
+msgid "Change Avatar"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:83 .\templates\main\edit-profile.html:144
+#: .\templates\main\outlet-address.html:34
+#: .\templates\main\outlet-address.html:76
+msgid "Name"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:89
+msgid "Email"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:117
+msgid "Personal Info"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:130
+#: .\templates\main\outlet-address.html:36
+#: .\templates\main\outlet-address.html:84
+msgid "Phone Number"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:136
+#: .\templates\main\outlet-address.html:35
+#: .\templates\main\outlet-address.html:80
+msgid "Address"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:142
+#: .\templates\main\edit-profile.html:144
+msgid "Bank"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:142
+#: .\templates\main\outlet-address.html:64
+msgid "Details"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:158
+msgid "Bank Account Details"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:162 .\templates\main\history.html:62
+#: .\templates\main\profile.html:62 .\templates\main\transfer.html:111
+#: .\templates\main\withdrawal.html:138
+msgid "Wallet"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:167
+msgid "Save Changes"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:168
+msgid "Cancel"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:181
+msgid "Account Password"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:184
+msgid "Current Password"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:189
+#: .\templates\main\edit-profile.html:194
+msgid "New Password"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:194 .\templates\main\register.html:99
+msgid "Confirm"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:200
+msgid "Change Password"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:213
+msgid "New"
+msgstr ""
+
+#: .\templates\main\edit-profile.html:222
+msgid "Change PIN"
+msgstr ""
+
+#: .\templates\main\header.html:88
+msgid "Choose Language"
+msgstr ""
+
+#: .\templates\main\header.html:113
+msgid "My Account"
+msgstr ""
+
+#: .\templates\main\header.html:114
+msgid "Edit Account"
+msgstr ""
+
+#: .\templates\main\header.html:116
+msgid "Outlet Details"
+msgstr ""
+
+#: .\templates\main\header.html:118
+msgid "Car Details"
+msgstr ""
+
+#: .\templates\main\header.html:120 .\templates\main\partners.html:16
+#: .\templates\main\transfer.html:71
+msgid "Partners"
+msgstr ""
+
+#: .\templates\main\header.html:121
+msgid "Register Member"
+msgstr ""
+
+#: .\templates\main\header.html:122
+msgid "Logout"
+msgstr ""
+
+#: .\templates\main\header.html:148
+msgid "Dashboard"
+msgstr ""
+
+#: .\templates\main\header.html:151 .\templates\main\withdrawal.html:121
+msgid "Withdraw"
+msgstr ""
+
+#: .\templates\main\header.html:152 .\templates\main\transfer.html:62
+#: .\templates\main\transfer.html:94
+msgid "Transfer"
+msgstr ""
+
+#: .\templates\main\header.html:153
+msgid "History"
+msgstr ""
+
+#: .\templates\main\history.html:60
+msgid "Category"
+msgstr ""
+
+#: .\templates\main\outlet-address.html:15
+#: .\templates\main\outlet-address.html:26
+msgid "Outlet Address"
+msgstr ""
+
+#: .\templates\main\outlet-address.html:34
+#: .\templates\main\outlet-address.html:64
+#: .\templates\main\outlet-address.html:76
+msgid "Outlet"
+msgstr ""
+
+#: .\templates\main\outlet-address.html:37
+msgid "ACTION"
+msgstr ""
+
+#: .\templates\main\outlet-address.html:94
+msgid "Add"
+msgstr ""
+
+#: .\templates\main\package.html:107 .\templates\main\package.html:143
+#: .\templates\main\package.html:179 .\templates\main\product.html:109
+#: .\templates\main\product.html:152 .\templates\main\product.html:195
+#: .\templates\main\withdrawal.html:112
+msgid "Total Amount"
+msgstr ""
+
+#: .\templates\main\package.html:111 .\templates\main\package.html:147
+#: .\templates\main\package.html:183 .\templates\main\product.html:118
+#: .\templates\main\product.html:161 .\templates\main\product.html:204
+#: .\templates\main\withdrawal.html:43 .\templates\main\withdrawal.html:79
+#: .\templates\main\withdrawal.html:116
+msgid "Pin Verification"
+msgstr ""
+
+#: .\templates\main\package.html:118 .\templates\main\package.html:154
+#: .\templates\main\package.html:190 .\templates\main\product.html:125
+#: .\templates\main\product.html:168 .\templates\main\product.html:211
+msgid "Buy"
+msgstr ""
+
+#: .\templates\main\package.html:232 .\templates\main\product.html:253
+#: .\templates\main\transfer.html:124 .\templates\main\withdrawal.html:151
+msgid "Success"
+msgstr ""
+
+#: .\templates\main\product.html:105 .\templates\main\product.html:148
+#: .\templates\main\product.html:191
+msgid "Quantity"
+msgstr ""
+
+#: .\templates\main\product.html:113 .\templates\main\product.html:156
+#: .\templates\main\product.html:199
+msgid "Installation Location"
+msgstr ""
+
+#: .\templates\main\profile.html:89
+msgid "Referral Link"
+msgstr ""
+
+#: .\templates\main\register.html:110
+msgid "Already Have an Account"
+msgstr ""
+
+#: .\templates\main\register.html:111
+msgid "Sign In"
+msgstr ""
+
+#: .\templates\main\transfer.html:81
+msgid "Verify"
+msgstr ""
+
+#: .\templates\main\withdrawal.html:33 .\templates\main\withdrawal.html:46
+#: .\templates\main\withdrawal.html:82
+msgid "Convert"
+msgstr ""
+
+#: .\templates\main\withdrawal.html:48 .\templates\main\withdrawal.html:84
+msgid "CONVERTING"
+msgstr ""
+
+#: .\templates\main\withdrawal.html:95
+msgid "Wthdrawal"
+msgstr ""
+
+#: .\templates\main\withdrawal.html:104
+msgid "Withdrawal Method"
+msgstr ""

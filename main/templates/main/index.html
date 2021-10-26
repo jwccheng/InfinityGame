@@ -1,0 +1,191 @@
+{% extends "landing/header.html" %}
+{% load static %}
+{% load i18n %}
+{% load mathfilters %}
+{% load widget_tweaks %}
+{% block content %}
+<div id="particles-js">
+        
+    <!-- banner start -->
+    <section class="banner-sec" id="particles-js1">
+   <div class="banner-item" style="background: url({% static 'assets/landing/images/background/banner_bg.jpg' %}) no-repeat center center /cover">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="banner-content">
+                        <h1 class="banner-title">Trade with the broker trusted by millions</h1>
+                        <p>
+                            Round the clock aid from our professional Fund Managers - Trade Profitably with minimal risk systems.     
+
+                        </p>
+                        <a href="/login" class="btn btn-primary">                Open a Trading Account                </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="banner-img-item">
+                <img class="banner-img" src="{% static 'assets/landing/images/banner/banner_img.png' %}" alt="">
+                <img class="banner-ico banner-ico-1" src="{% static 'assets/landing/images/banner/b1.png' %}" alt="">
+                <img class="banner-ico banner-ico-2" src="{% static 'assets/landing/images/banner/b1.png' %}" alt="">
+                <img class="banner-ico banner-ico-3" src="{% static 'assets/landing/images/banner/b1.png' %}" alt="">
+                <img class="banner-ico banner-ico-4" src="{% static 'assets/landing/images/banner/b1.png' %}" alt="">
+                <img class="banner-ico banner-ico-5" src="{% static 'assets/landing/images/banner/b1.png' %}" alt="">
+            </div>
+        </div><!--  .cont  ainer END -->
+     
+   </div>
+</section>    <!-- banner section end -->
+
+    <div class="featured-area">
+    
+        <div class="blockcain-and-featured-area" >
+            
+            <!-- blockcain section start -->
+            <section class="blockcain-top-sec">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6 wow fadeInUp" data-wow-duration="1.5s">
+              <div class="blockcain-top">
+                  <h2 class="column-title">We Partner with Prime Brokerage</h2>
+              </div>
+          </div><!-- col end -->
+          <div class="col-md-5 offset-md-1 wow fadeInUp" data-wow-duration="2s">
+              <div class="blockcain-top-content">
+                  <p>
+                    Trading services ensures all investor funds and accounts are backed with the highest level of integrity, security and quality.                            
+                  </p>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>            <!-- blockcain section end -->
+
+            <!-- featured section start -->
+            <section class="featured-sec" id="featured">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-8 mx-auto">
+              <div class="section-title-item">
+                  <small class="xs-section-title">EOB Corporation</small>
+                  <h2 class="section-title">Who We Are</h2>
+              </div>
+          </div>
+      </div><!-- row end -->
+      <div class="main-fetured-item">
+          <div class="row">
+              <div class="col-md-4 wow fadeInUp" data-wow-duration="1.5s">
+                  <div class="single-feaured-item">
+                      <img src="{% static 'assets/landing/images/feature/icon-1.png' %}" alt="">
+                      <h3 class="feature-title">
+                         Highly Specialised
+                      </h3>
+                      <p>
+                        EOB Corporation was founded in 2016 by a highly-specialised team with backgrounds in Finance, FOREX and Technology.
+                    </p>
+                  </div>
+              </div><!-- col end -->
+              <div class="col-md-4 wow fadeInUp" data-wow-duration="2s">
+                  <div class="single-feaured-item">
+                      <img src="{% static 'assets/landing/images/feature/icon-2.png' %}" alt="">
+                      <h3 class="feature-title">
+                        Transparent Access                      </h3>
+                      <p>
+                        We proudly offer transparent access to the FOREX market, powerful trading platforms MT4 and MT5.
+                      </p>
+                  </div>
+              </div><!-- col end -->
+              <div class="col-md-4 wow fadeInUp" data-wow-duration="2.5s">
+                  <div class="single-feaured-item">
+                      <img src="{% static 'assets/landing/images/feature/icon-3.png' %}" alt="">
+                      <h3 class="feature-title">
+                          First to Market Services                      </h3>
+                      <p>
+                        We continually strive to evolve our offering to ensure that we deliver a service that is far superior to anything else on the market.
+                    </p>
+                  </div>
+              </div><!-- col end -->
+          </div><!-- row end -->
+      </div><!-- main-fetured-item end -->
+
+      <div class="featured-poligonal-img wow fadeInUp" data-wow-duration="1.5s">
+         <img class="poligonal-img" src="{% static 'assets/landing/images/feature/poligonal.png' %}" alt="">
+      </div>
+ 
+  </div>
+</section>            <!-- featured section end -->
+        </div>
+        <div class="how-work-and-token-area">
+            <!-- how work section start -->
+            <section class="how-work-sec section-padding" id="how_work">
+      <div class="container">
+         <div class="row">
+              <div class="col-lg-8 mx-auto">
+                  <div class="section-title-item">
+                      <small class="xs-section-title">EOB Corporation</small>
+                      <h2 class="section-title">Our Competitive Advantages</h2>
+                  </div>
+              </div>
+          </div><!-- row end -->
+          <div class="row">
+              <div class="col-lg-5 offset-lg-1 col-md-6 align-self-center wow fadeInUp" data-wow-duration="2s">
+                <div class="work-token-item">
+                    <ul>
+                        <li>
+                           <strong> Competitive
+                            pricing
+                            from 0.0 pips</strong>
+                           <span> Trade on
+                            institutional grade spreads</span>
+                        </li>
+                        <li>
+                            <strong> No conflict
+                                of
+                                interest</strong>
+                            <span>True STP/ECN execution, without dealing desk intervention​</span>
+                        </li>
+                        <li>
+                            <strong>Lightning
+                                fast
+                                execution</strong>
+                            <span>Trade with our
+                                superfast execution</span>
+                        </li>
+                        <li>
+                             <strong> Award winning
+                                24 hour support</strong>
+                            <span>Global 24/5 support
+                                for our traders</span>
+                        </li>
+                        <li>
+                            <strong>Top-tier
+                                liquidity providers</strong>
+                            <span>Gain access to deep
+                                institutional FX liquidity pool</span>
+                        </li>
+                        <li>
+                             <strong> Strictly
+                                Regulated</strong>
+                            <span>Fully regulated by the Caymen Islands Monetary Authority (CIMA)​
+
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+              </div><!-- col end -->
+              <div class="col-lg-5 align-self-center col-md-12 wow fadeInUp" data-wow-duration="2.5s">
+                <div class="work-video">
+                    <img src="{% static 'assets/landing/images/how-works/video.jpg' %}" alt="">
+                    <a href="https://www.youtube.com/watch?v=2X9eJF1nLiY" class="video-btn xs-video" data-effect="mfp-zoom-in">
+                        <i class="icon icon-play-button2"></i>
+                        <span class="btn-hover-anim"></span>
+                    </a>
+                </div>
+              </div><!-- col end -->
+          </div><!-- row end -->
+      </div>
+    </section>        <!-- how work section end -->
+    </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,225 @@
+{% extends "dashboard/header.html" %}
+{% load static %}
+{% load i18n %}
+{% load mathfilters %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="content-body">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-3 col-xxl-4 mt-4">
+				<div class="card">
+					<div class="card-header pb-0 border-0">
+						<h4 class="mb-0 text-black fs-20">About</h4>
+						<div class="dropdown custom-dropdown mb-0">
+							<div class="btn sharp pr-0 tp-btn" data-toggle="dropdown">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M12.0049 13C12.5572 13 13.0049 12.5523 13.0049 12C13.0049 11.4477 12.5572 11 12.0049 11C11.4526 11 11.0049 11.4477 11.0049 12C11.0049 12.5523 11.4526 13 12.0049 13Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M12.0049 6C12.5572 6 13.0049 5.55228 13.0049 5C13.0049 4.44772 12.5572 4 12.0049 4C11.4526 4 11.0049 4.44772 11.0049 5C11.0049 5.55228 11.4526 6 12.0049 6Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M12.0049 20C12.5572 20 13.0049 19.5523 13.0049 19C13.0049 18.4477 12.5572 18 12.0049 18C11.4526 18 11.0049 18.4477 11.0049 19C11.0049 19.5523 11.4526 20 12.0049 20Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+							</div>
+							<div class="dropdown-menu dropdown-menu-right">
+								<a class="dropdown-item" href="javascript:void(0);">Details</a>
+								<a class="dropdown-item text-danger" href="javascript:void(0);">Cancel</a>
+							</div>
+						</div>
+					</div>
+					<div class="card-body height400 dz-scroll" id="about-1">
+						<div class="d-flex align-items-start mb-3 about-coin">
+							<div>
+								<img src="images/svg/btc1.svg" alt="">
+							</div>
+							<div class="ml-3">
+								<h2 class="font-w600 text-black mb-0 title">Lucky Number</h2>
+							</div>	
+						</div>
+						<p class="fs-14">To play Lucky Number, select a four-digit number from 0000 to 9999.
+							The minimum cost is $1, inclusive of GST.
+							Draws take place every Wednesday, Saturday and Sunday at 6.30pm.
+							23 sets of winning 4D numbers across five prize categories are drawn each draw.
+							If you have placed bets on any of the 23 winning 4D numbers, you win a prize.</p>
+					</div>
+					<div class="card-footer border-0 p-0 caret">
+						<a href="coin-details.html" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-9 col-xxl-8 mt-4">
+				<div class="card">
+					<div class="table-responsive table-hover fs-14 ">
+							<table class="table display mb-4 dataTablesCard font-w600  border-no card-table text-black" id="example6">
+								<thead>
+									<tr>
+										<th>Order ID</th>
+										<th>Tickets</th>
+										<th>Amount</th>
+										<th>Date</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for ticket in tickets %}
+										<tr>
+											<td>
+												<a href="{% url 'main:lucky_number_details' ticket.order_id %}">{{ticket.order_id}}	</a>
+												
+											</td>
+											<td class="wspace-no">
+												<span class="bgl-secondary rank-ic fs-20">{{ticket.ticket.count}}</span>
+											</td>
+											<td>{{ticket.amount}} <span> <img src="{% static 'd-assets/images/goldcoin.png' %}" height="35px"></span></td>
+											<td></td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>	
+						</div>	
+				</div>
+			</div>
+			<div class="col-xl-12 col-xxl-12">
+				<div class="card">
+					<div class="card-header">
+						<div>
+							<h4 class="fs-20 text-black">Lucky Number</h4>
+							<p class="mb-0 fs-12">Click here</p>
+						</div>
+						<div class="d-block mt-3 mt-sm-0 mb-0">
+							<h4 class="fs-20 text-black">Cost : 1 <span> <img src="{% static 'd-assets/images/goldcoin.png' %}" height="35px"></span></h4>
+						</div>
+					</div>
+					<div class="card-body">
+						<ul class="nav nav-pills mb-4 light">
+							<li class=" nav-item">
+								<a href="#navpills-1" class="nav-link active" data-toggle="tab" aria-expanded="false">Front</a>
+							</li>
+							<li class="nav-item">
+								<a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Back</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div id="navpills-1" class="tab-pane active">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="basic-form">
+											<form class="form-wrapper" method="POST">
+												{% csrf_token %}
+												<div class="form-group">
+													<div class="input-group input-group-lg">
+														<div class="input-group-prepend">
+															<span class="input-group-text">Lucky Number</span>
+														</div>
+														<div class="col-sm-1">
+															{{formF.num1 | add_class:"form-control" | attr:"oninput:'javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);'" | attr:"maxlength:1"}}
+														</div>
+														<div class="col-sm-1 mt-2 mt-sm-0">
+															{{formF.num2 | add_class:"form-control"}}
+														</div>
+														<div class="col-sm-1 mt-2 mt-sm-0">
+															{{formF.num3 | add_class:"form-control"}}
+														</div>
+														<div class="col-sm-1 mt-2 mt-sm-0">
+															{{formF.num4 | add_class:"form-control"}}
+														</div>
+														<div class="col-sm-1 mt-2 mt-sm-0">
+															<input type="text" class="form-control" value="?" disabled>
+														</div>
+														<div class="col-sm-1 mt-2 mt-sm-0">
+															<input type="text" class="form-control" value="?" disabled>
+														</div>
+														<div class="col-sm-1 mt-2 mt-sm-0">
+															<input type="text" class="form-control" value="?" disabled>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="input-group input-group-lg">
+														<div class="input-group-prepend">
+															<span class="input-group-text">Quantity</span>
+														</div>
+														{{formF.quantity | add_class:"form-control"}}
+													</div>
+												</div>
+												<div class="row mt-4 align-items-center">
+													<div class="col-sm-6 mb-3">
+														<p class="mb-0 fs-14">Please agree to our terms and condition</p>
+													</div>
+													<div class="col-sm-6 text-sm-right text-left">
+														<button type="submit" class="btn btn-success" name="frontSequence">Buy</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="navpills-2" class="tab-pane">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="basic-form">
+											<form class="form-wrapper" method="POST">
+												{% csrf_token %}
+												<div class="form-group">
+													<div class="input-group input-group-lg">
+														<div class="input-group-prepend">
+															<span class="input-group-text">Lucky Number</span>
+														</div>
+														<div class="col-sm-1">
+															<input type="text" class="form-control" value="?" disabled>
+														</div>
+														<div class="col-sm-1 mt-2 mt-sm-0">
+															<input type="text" class="form-control" value="?" disabled>
+														</div>
+														<div class="col-sm-1 mt-2 mt-sm-0">
+															<input type="text" class="form-control" value="?" disabled>
+														</div>
+														<div class="col-sm-1 mt-2 mt-sm-0">
+															{{formB.num1 | add_class:"form-control"}}
+														</div>
+														<div class="col-sm-1 mt-2 mt-sm-0">
+															{{formB.num2 | add_class:"form-control"}}
+														</div>
+														<div class="col-sm-1 mt-2 mt-sm-0">
+															{{formB.num3 | add_class:"form-control"}}
+														</div>
+														<div class="col-sm-1 mt-2 mt-sm-0">
+															{{formB.num4 | add_class:"form-control"}}
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="input-group input-group-lg">
+														<div class="input-group-prepend">
+															<span class="input-group-text">Quantity</span>
+														</div>
+														{{formB.quantity | add_class:"form-control"}}
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="input-group input-group-lg">
+														<div class="input-group-prepend">
+															<span class="input-group-text">Total Price</span>
+														</div>
+														<input type="text" class="form-control" placeholder="0">
+													</div>
+												</div>
+												<div class="row mt-4 align-items-center">
+													<div class="col-sm-6 mb-3">
+														<p class="mb-0 fs-14">Please agree to our terms and condition</p>
+													</div>
+													<div class="col-sm-6 text-sm-right text-left">
+														<button type="submit" class="btn btn-success" name="backSequence">Buy</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

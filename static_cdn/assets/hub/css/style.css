@@ -1,0 +1,13 @@
+/* ---- particles.js container ---- */
+#particles-js,
+#particles-js1 {
+  position: relative;
+  width: 100%;
+  height: 100%; }
+
+.particles-js-canvas-el {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%; }
